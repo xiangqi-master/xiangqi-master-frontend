@@ -1,5 +1,6 @@
 import Position from "./Position"
 import Board from "./Board"
+import position from "./Position"
 
 abstract class Piece {
   public readonly code: number
@@ -11,10 +12,8 @@ abstract class Piece {
   }
 
   public isValidMove(board: Board, targetPosition: Position): boolean {
-    return (
-      this.getAllValidMoves(board).findIndex((position) =>
-        position.equals(targetPosition)
-      ) !== -1
+    return this.getAllValidMoves(board).some((position) =>
+      position.equals(targetPosition)
     )
   }
 
