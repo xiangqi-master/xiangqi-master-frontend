@@ -22,7 +22,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx src",
-    "prepare": "husky init && echo \"npm run lint:fix && git add -A .\" > .husky/pre-commit"
+    "prepare": "husky init && echo \"added_files=\\$(git diff --name-only --cached --diff-filter=d)\nnpm run lint:fix && git add \\${added_files}\n\" > .husky/pre-commit"
   },
   "browserslist": {
     "production": [
