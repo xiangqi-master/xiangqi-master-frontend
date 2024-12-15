@@ -9,8 +9,10 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
-          node-version: '16'
+          node-version: '18'
       - name: npm install
         run: npm install -D
       - name: run ESLint
         run: npm run lint:fix
+      - name: run test cases
+        run: npm run test
