@@ -27,6 +27,9 @@ abstract class Piece {
   }
 
   public equals(piece: Piece): boolean {
+    if (piece == null) {
+      return false
+    }
     return this.code === piece.code && this.position.equals(piece.position)
   }
 
