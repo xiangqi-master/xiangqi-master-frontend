@@ -11,7 +11,7 @@ jobs:
         with:
           node-version: '18'
       - name: npm install
-        run: npm install -D
+        run: npm install -D --legacy-peer-deps
       - name: run ESLint
         run: npm run lint:fix
       - name: run test cases

@@ -21,7 +21,7 @@
     "react-test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx src",
-    "prepare": "husky init && echo \"added_files=\\$(git diff --name-only --cached --diff-filter=d)\nnpm run lint:fix && git add \\${added_files}\n\" > .husky/pre-commit && echo \"npm run test\" > .husky/pre-push",
+    "prepare": "husky",
     "test": "jest"
   },
   "browserslist": {
@@ -47,6 +47,7 @@
     "husky": "^9.1.7",
     "jest": "^27.5.1",
     "nodemon": "^3.1.7",
+    "prettier": "^3.4.2",
     "ts-jest": "^29.2.5"
   }
 }
