@@ -4,7 +4,7 @@ import Position from "./Position"
 class Board {
   public board: Piece[]
 
-  public constructor(board: Piece[]) {
+  public constructor(board: Piece[] = []) {
     this.board = board
   }
 
@@ -14,6 +14,13 @@ class Board {
 
   public getPieceByPosition(position: Position): Piece | undefined {
     return this.board.find((piece) => piece.position.equals(position))
+  }
+
+  public equals(board: Board): boolean {
+    if (board == null) {
+      return false
+    }
+    return this.board.every((piece) => board.board.some((e) => e.equals(piece)))
   }
 
   public toString(): string {

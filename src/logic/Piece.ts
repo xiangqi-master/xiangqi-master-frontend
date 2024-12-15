@@ -1,6 +1,5 @@
 import Position from "./Position"
 import Board from "./Board"
-import position from "./Position"
 
 abstract class Piece {
   public readonly code: number
@@ -25,6 +24,10 @@ abstract class Piece {
 
   public isRed(): boolean {
     return this.code < 10
+  }
+
+  public equals(piece: Piece): boolean {
+    return this.code === piece.code && this.position.equals(piece.position)
   }
 
   public toString(): string {
