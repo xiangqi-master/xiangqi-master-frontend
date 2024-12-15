@@ -11,16 +11,19 @@ class Pawn extends Piece {
     const isRed: boolean = super.isRed()
     const forwardDirection: 1 | -1 = isRed ? 1 : -1
     const moveDirections: number[][] = [
-      [0, -1],
-      [0, 1],
-      [forwardDirection, 0]
+      [-1, 0],
+      [1, 0],
+      [0, forwardDirection]
     ]
-    const [x, y]: [number, number] = this.position.getPosition()
+    const invalidXCoordinates: number[] = [1, 3, 5, 7]
 
     return moveDirections
       .map(
         (moveDirection) =>
-          new Position(x + moveDirection[0], y + moveDirection[1])
+          new Position(
+            this.position.getX() + moveDirection[0],
+            this.position.getY() + moveDirection[1]
+          )
       )
       .filter((position) => position.isWithinBoundary())
       .filter((position) =>
@@ -28,5 +31,14 @@ class Pawn extends Piece {
           .filter((piece) => piece.position.equals(position))
           .every((piece) => piece.isRed() !== isRed)
       )
+      .filter(
+        (position) =>
+          position.isCrossRiver(isRed) ||
+          !invalidXCoordinates.some(
+            (invalidXCoordinate) => invalidXCoordinate === position.getX()
+          )
+      )
   }
 }
+
+export default Pawn
