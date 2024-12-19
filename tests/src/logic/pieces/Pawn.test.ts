@@ -2,6 +2,11 @@ import Pawn from "../../../../src/logic/pieces/Pawn"
 import Board from "../../../../src/logic/Board"
 import Position from "../../../../src/logic/Position"
 
+function createPawn(isRed: boolean, position: Position): Pawn {
+  const code = 6
+  return new Pawn(isRed ? code : code + 10, position)
+}
+
 describe("Test: Pawn in an empty board", () => {
   let emptyBoard: Board
   beforeAll(() => {
@@ -10,7 +15,7 @@ describe("Test: Pawn in an empty board", () => {
 
   // red pawn
   it("red pawn at (0, 3)", () => {
-    const pawn = new Pawn(6, new Position(0, 3))
+    const pawn = createPawn(true, new Position(0, 3))
     emptyBoard.board.push(pawn)
     let expectedValidMoves: Position[] = [new Position(0, 4)]
     let actualMoves: Position[] = pawn.getAllValidMoves(emptyBoard)
@@ -21,7 +26,7 @@ describe("Test: Pawn in an empty board", () => {
   })
 
   it("red pawn at (0, 5)", () => {
-    const pawn = new Pawn(6, new Position(0, 5))
+    const pawn = createPawn(true, new Position(0, 5))
     emptyBoard.board.push(pawn)
     let expectedValidMoves: Position[] = [
       new Position(0, 6),
@@ -35,7 +40,7 @@ describe("Test: Pawn in an empty board", () => {
   })
 
   it("red pawn at (2, 6)", () => {
-    const pawn = new Pawn(6, new Position(2, 6))
+    const pawn = createPawn(true, new Position(2, 6))
     emptyBoard.board.push(pawn)
     let expectedValidMoves: Position[] = [
       new Position(2, 7),
@@ -50,7 +55,7 @@ describe("Test: Pawn in an empty board", () => {
   })
 
   it("red pawn at (8, 9)", () => {
-    const pawn = new Pawn(6, new Position(8, 9))
+    const pawn = createPawn(true, new Position(8, 9))
     emptyBoard.board.push(pawn)
     let expectedValidMoves: Position[] = [new Position(7, 9)]
     let actualMoves: Position[] = pawn.getAllValidMoves(emptyBoard)
@@ -62,7 +67,7 @@ describe("Test: Pawn in an empty board", () => {
 
   // black pawn
   it("black pawn at (0, 5)", () => {
-    const pawn = new Pawn(16, new Position(0, 5))
+    const pawn = createPawn(false, new Position(0, 5))
     emptyBoard.board.push(pawn)
     let expectedValidMoves: Position[] = [new Position(0, 4)]
     let actualMoves: Position[] = pawn.getAllValidMoves(emptyBoard)
@@ -73,7 +78,7 @@ describe("Test: Pawn in an empty board", () => {
   })
 
   it("black pawn at (0, 4)", () => {
-    const pawn = new Pawn(16, new Position(0, 4))
+    const pawn = createPawn(false, new Position(0, 4))
     emptyBoard.board.push(pawn)
     let expectedValidMoves: Position[] = [
       new Position(0, 3),
@@ -87,7 +92,7 @@ describe("Test: Pawn in an empty board", () => {
   })
 
   it("black pawn at (6, 2)", () => {
-    const pawn = new Pawn(16, new Position(6, 2))
+    const pawn = createPawn(false, new Position(6, 2))
     emptyBoard.board.push(pawn)
     let expectedValidMoves: Position[] = [
       new Position(6, 1),
@@ -102,7 +107,7 @@ describe("Test: Pawn in an empty board", () => {
   })
 
   it("black pawn at (8, 0)", () => {
-    const pawn = new Pawn(16, new Position(8, 0))
+    const pawn = createPawn(false, new Position(8, 0))
     emptyBoard.board.push(pawn)
     let expectedValidMoves: Position[] = [new Position(7, 0)]
     let actualMoves: Position[] = pawn.getAllValidMoves(emptyBoard)
@@ -120,7 +125,7 @@ describe("Test: Pawn surrounded obstacles", () => {
   })
 
   it("red pawn at (2, 6) with two obstacles", () => {
-    const pawn: Pawn = new Pawn(6, new Position(2, 6))
+    const pawn = createPawn(true, new Position(2, 6))
     emptyBoard.board.push(new Pawn(6, new Position(1, 6)))
     emptyBoard.board.push(new Pawn(6, new Position(3, 6)))
     let expectedValidMoves: Position[] = [new Position(2, 7)]
@@ -132,7 +137,7 @@ describe("Test: Pawn surrounded obstacles", () => {
   })
 
   it("black pawn at (6,2) with one obstacle", () => {
-    const pawn: Pawn = new Pawn(16, new Position(6, 2))
+    const pawn = createPawn(false, new Position(6, 2))
     emptyBoard.board.push(new Pawn(16, new Position(6, 1)))
     emptyBoard.board.push(new Pawn(6, new Position(5, 2)))
     let expectedValidMoves: Position[] = [
@@ -147,7 +152,7 @@ describe("Test: Pawn surrounded obstacles", () => {
   })
 
   it("black pawn at (6,2) with three obstacles", () => {
-    const pawn: Pawn = new Pawn(16, new Position(6, 2))
+    const pawn = createPawn(false, new Position(6, 2))
     emptyBoard.board.push(new Pawn(16, new Position(6, 1)))
     emptyBoard.board.push(new Pawn(16, new Position(5, 2)))
     emptyBoard.board.push(new Pawn(16, new Position(7, 2)))
@@ -162,7 +167,8 @@ describe("Test: Pawn surrounded obstacles", () => {
 
 describe("Test (Pawn): Immutability of board", () => {
   const emptyBoard = new Board([])
-  const pawn: Pawn = new Pawn(6, new Position(6, 2))
+  const pawn = createPawn(true, new Position(6, 2))
+
   emptyBoard.board.push(new Pawn(16, new Position(6, 1)))
   emptyBoard.board.push(new Pawn(16, new Position(5, 2)))
   emptyBoard.board.push(new Pawn(16, new Position(7, 2)))
