@@ -24,6 +24,7 @@
     "jest",
     "prettier"
   ],
+  "ignorePatterns": ["/*", "!/src", "!/tests"],
   "rules": {
     "prettier/prettier": [
       "warn"
