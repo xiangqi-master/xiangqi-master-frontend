@@ -2,10 +2,10 @@ import Piece from "./Piece"
 import Position from "./Position"
 
 class Board {
-  public board: Piece[]
+  public pieces: Piece[]
 
   public constructor(board: Piece[] = []) {
-    this.board = board
+    this.pieces = board
   }
 
   public move(startPosition: Position, endPosition: Position): void {
@@ -13,14 +13,16 @@ class Board {
   }
 
   public getPieceByPosition(position: Position): Piece | undefined {
-    return this.board.find((piece) => piece.position.equals(position))
+    return this.pieces.find((piece) => piece.position.equals(position))
   }
 
   public equals(board: Board): boolean {
     if (board == null) {
       return false
     }
-    return this.board.every((piece) => board.board.some((e) => e.equals(piece)))
+    return this.pieces.every((piece) =>
+      board.pieces.some((e) => e.equals(piece))
+    )
   }
 
   public toString(): string {

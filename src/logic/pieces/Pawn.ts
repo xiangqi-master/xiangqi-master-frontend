@@ -27,7 +27,7 @@ class Pawn extends Piece {
       )
       .filter((position) => position.isWithinBoundary())
       .filter((position) =>
-        board.board
+        board.pieces
           .filter((piece) => piece.position.equals(position))
           .every((piece) => piece.isRed() !== isRed)
       )
