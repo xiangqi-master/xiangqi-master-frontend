@@ -1,6 +1,6 @@
 class Position {
-  private x: number
-  private y: number
+  private readonly x: number
+  private readonly y: number
 
   constructor(x: number, y: number) {
     this.x = x
@@ -9,11 +9,6 @@ class Position {
 
   public getPosition(): [number, number] {
     return [this.x, this.y]
-  }
-
-  public setPosition(position: Position): void {
-    this.x = position.x
-    this.y = position.y
   }
 
   public getX(): number {

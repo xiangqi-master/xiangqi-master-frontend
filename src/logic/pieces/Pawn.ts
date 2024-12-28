@@ -21,14 +21,15 @@ class Pawn extends Piece {
       .map(
         (moveDirection) =>
           new Position(
-            this.position.getX() + moveDirection[0],
-            this.position.getY() + moveDirection[1]
+            this.getPosition().getX() + moveDirection[0],
+            this.getPosition().getY() + moveDirection[1]
           )
       )
       .filter((position) => position.isWithinBoundary())
       .filter((position) =>
-        board.pieces
-          .filter((piece) => piece.position.equals(position))
+        board
+          .getPieces()
+          .filter((piece) => piece.getPosition().equals(position))
           .every((piece) => piece.isRed() !== isRed)
       )
       .filter(
