@@ -24,6 +24,7 @@
     "eject": "react-scripts eject",
     "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx .",
     "prepare": "husky",
+    "prepare-husky-scripts": "echo \"added_files=\\$(git diff --name-only --cached --diff-filter=d)\nnpm run lint:fix && git add \\${added_files}\" > .husky/pre-commit && echo \"npm run test\" > .husky/pre-push",
     "test": "jest"
   },
   "browserslist": {
