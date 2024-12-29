@@ -89,4 +89,11 @@ describe("Test: equals", () => {
     // @ts-ignore
     expect(position1.equals(position2)).toBeFalsy()
   })
+
+  it("equals === false due to undefined position", () => {
+    let position1 = new Position(1, 3)
+    let position2 = undefined
+    // @ts-ignore
+    expect(position1.equals(position2)).toBeFalsy()
+  })
 })

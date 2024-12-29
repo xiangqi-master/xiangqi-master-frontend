@@ -36,7 +36,7 @@ abstract class Piece implements ValueObject {
   }
 
   public equals(piece: Piece): boolean {
-    if (piece == null) {
+    if (!piece) {
       return false
     }
 

@@ -41,7 +41,7 @@ class Board {
   }
 
   public equals(board: Board): boolean {
-    if (board == null) {
+    if (!board) {
       return false
     }
     return this.pieces.every((piece) =>

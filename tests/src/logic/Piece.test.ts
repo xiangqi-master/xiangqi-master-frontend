@@ -47,6 +47,12 @@ describe("equals", () => {
     expect(pawn.equals(null)).toBeFalsy()
   })
 
+  it("Undefined values", () => {
+    const pawn = new PawnStub(0, new Position(0, 0))
+    // @ts-ignore
+    expect(pawn.equals(undefined)).toBeFalsy()
+  })
+
   it("Different instances but same values", () => {
     const pawn = new PawnStub(2, new Position(2, 3))
     const horse = new HorseStub(2, new Position(2, 3))

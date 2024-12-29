@@ -41,7 +41,7 @@ class Position {
   }
 
   public equals(position: Position): boolean {
-    if (position == null) {
+    if (!position) {
       return false
     }
     return this.x === position.x && this.y === position.y
