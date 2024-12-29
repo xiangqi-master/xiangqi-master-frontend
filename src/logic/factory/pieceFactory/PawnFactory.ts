@@ -1,10 +1,11 @@
 import Position from "../../Position"
 import PieceFactory from "../PieceFactory"
 import Pawn from "../../pieces/Pawn"
+import PieceType from "../PieceType"
 
 class PawnFactory extends PieceFactory {
   constructor() {
-    super(6)
+    super(PieceType.PAWN)
   }
 
   public override createPiece(isRed: boolean, position: Position): Pawn {
