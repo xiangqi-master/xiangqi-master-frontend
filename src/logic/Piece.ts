@@ -48,12 +48,15 @@ abstract class Piece implements ValueObject {
     return this.code === piece.code && this.position.equals(piece.position)
   }
 
+  /**
+   * The implementation makes use of [Cantor pairing function](https://en.wikipedia.org/wiki/Pairing_function#Cantor_pairing_function)
+   * to generate the unique hash code.
+   */
   public hashCode(): number {
-    const x: number = this.code
-    const y: number = this.position.getX()
-    const z: number = this.position.getY()
+    const a = this.code
+    const b = this.position.hashCode()
 
-    return x ^ y ^ z
+    return (((a + b) * (a + b + 1)) >> 1) + b
   }
 
   public toString(): string {

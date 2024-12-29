@@ -32,6 +32,14 @@ class Position {
     return this.y <= 4
   }
 
+  /**
+   * The implementation makes use of [Cantor pairing function](https://en.wikipedia.org/wiki/Pairing_function#Cantor_pairing_function)
+   * to generate the unique hash code.
+   */
+  public hashCode(): number {
+    return (((this.x + this.y) * (this.x + this.y + 1)) >> 1) + this.y
+  }
+
   public equals(position: Position): boolean {
     if (position == null) {
       return false
