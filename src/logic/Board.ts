@@ -1,6 +1,6 @@
 import Piece from "./Piece"
 import Position from "./Position"
-import { Set } from "immutable"
+import { Set, is } from "immutable"
 
 class Board {
   private readonly pieces: Set<Piece>
@@ -44,9 +44,7 @@ class Board {
     if (!board) {
       return false
     }
-    return this.pieces.every((piece) =>
-      board.pieces.some((e) => e.equals(piece))
-    )
+    return is(this.pieces, board.pieces)
   }
 
   public toString(): string {
