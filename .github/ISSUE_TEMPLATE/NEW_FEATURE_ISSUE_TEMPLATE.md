@@ -6,7 +6,7 @@ labels: type.enhancement
 assignees: ""
 ---
 
-## Feature description
+## Feature Description
 
 ## Benefits
 
