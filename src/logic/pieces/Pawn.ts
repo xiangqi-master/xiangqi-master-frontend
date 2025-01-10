@@ -40,6 +40,10 @@ class Pawn extends Piece {
           )
       )
   }
+
+  public override toString(): string {
+    return "P"
+  }
 }
 
 export default Pawn

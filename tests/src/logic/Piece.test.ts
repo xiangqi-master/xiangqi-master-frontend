@@ -10,6 +10,10 @@ class PawnStub extends Piece {
   getAllValidMoves(_board: Board): Position[] {
     return []
   }
+
+  toString(): string {
+    return "P"
+  }
 }
 
 class HorseStub extends Piece {
@@ -19,6 +23,10 @@ class HorseStub extends Piece {
 
   getAllValidMoves(_board: Board): Position[] {
     return []
+  }
+
+  toString(): string {
+    return "H"
   }
 }
 
