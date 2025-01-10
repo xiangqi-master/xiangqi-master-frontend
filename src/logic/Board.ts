@@ -22,6 +22,7 @@ class Board {
 
     const newPieces: Set<Piece> = this.pieces
       .delete(targetPiece)
+      .filterNot((piece) => piece.getPosition().equals(endPosition))
       .add(targetPiece.move(endPosition))
 
     return new Board(newPieces)
