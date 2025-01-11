@@ -1,6 +1,7 @@
 import Piece from "./Piece"
 import Position from "./Position"
 import { Set, is } from "immutable"
+import Optional from "./utils/Optional"
 
 class Board {
   private readonly pieces: Set<Piece>
@@ -14,18 +15,19 @@ class Board {
   }
 
   public move(startPosition: Position, endPosition: Position): Board {
-    const targetPiece: Piece | undefined = this.pieces.find((piece) =>
-      piece.getPosition().equals(startPosition)
+    return Optional.ofNullable(
+      this.pieces.find((piece) => piece.getPosition().equals(startPosition))
     )
-
-    if (targetPiece === undefined) return this
-
-    const newPieces: Set<Piece> = this.pieces
-      .delete(targetPiece)
-      .filterNot((piece) => piece.getPosition().equals(endPosition))
-      .add(targetPiece.move(endPosition))
-
-    return new Board(newPieces)
+      .map(
+        (pieceToMove: Piece) =>
+          new Board(
+            this.pieces
+              .delete(pieceToMove)
+              .filterNot((piece) => piece.getPosition().equals(endPosition))
+              .add(pieceToMove.move(endPosition))
+          )
+      )
+      .orElse(new Board(this.pieces))
   }
 
   public getPieceByPosition(position: Position): Piece | undefined {
