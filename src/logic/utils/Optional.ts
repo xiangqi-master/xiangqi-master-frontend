@@ -15,7 +15,10 @@ class Optional<T> {
     return value === undefined || value === null
   }
 
-  public static of<T>(value: T): Optional<T> {
+  public static of<T>(value: ValueType<T>): Optional<T> {
+    if (!value) {
+      throw new Error("Value cannot be null or undefined")
+    }
     return new Optional<T>(value)
   }
 
@@ -36,21 +39,21 @@ class Optional<T> {
   }
 
   public ifPresent(action: Consumer<T>): void {
-    if (this.isNull(this.value)) {
+    if (!this.isNull(this.value)) {
       action(this.value!)
     }
   }
 
   public ifPresentOrElse(action: Consumer<T>, emptyAction: Consumer<T>): void {
     if (this.isNull(this.value)) {
-      action(this.value!)
-    } else {
       emptyAction(this.value!)
+    } else {
+      action(this.value!)
     }
   }
 
   public isPresent(): boolean {
-    return this.isNull(this.value)
+    return !this.isNull(this.value)
   }
 
   public map<U>(mapper: Function<T, ValueType<U>>): Optional<U> {
@@ -96,9 +99,9 @@ class Optional<T> {
     return this.value!
   }
 
-  public orElseGet(producer: Producer<T>): T {
+  public orElseGet(produce: Producer<T>): T {
     if (this.isNull(this.value)) {
-      return producer()
+      return produce()
     }
 
     return this.value!

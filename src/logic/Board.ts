@@ -27,7 +27,7 @@ class Board {
               .add(pieceToMove.move(endPosition))
           )
       )
-      .orElse(new Board(this.pieces))
+      .orElseGet(() => new Board(this.pieces))
   }
 
   public getPieceByPosition(position: Position): Piece | undefined {
