@@ -17,7 +17,7 @@ abstract class Piece implements ValueObject {
     )
   }
 
-  abstract getAllValidMoves(_board: Board): Position[]
+  public abstract getAllValidMoves(_board: Board): Position[]
 
   public move(targetPosition: Position): Piece {
     return new (this.constructor as any)(this.code, targetPosition)
@@ -59,10 +59,7 @@ abstract class Piece implements ValueObject {
     return (((a + b) * (a + b + 1)) >> 1) + b
   }
 
-  public toString(): string {
-    // TODO
-    return ""
-  }
+  public abstract toString(): string
 }
 
 export default Piece

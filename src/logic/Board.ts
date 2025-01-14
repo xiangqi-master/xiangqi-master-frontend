@@ -51,8 +51,14 @@ class Board {
   }
 
   public toString(): string {
-    // TODO
-    return ""
+    return this.pieces
+      .sortBy((piece) => piece.getPosition().getY())
+      .sortBy((piece) => piece.getPosition().getX())
+      .map(
+        (piece) =>
+          `(${piece.toString()}-${piece.isRed() ? "Red" : "Black"}-[${piece.getPosition().getX()},${piece.getPosition().getY()}])`
+      )
+      .join(";")
   }
 }
 
