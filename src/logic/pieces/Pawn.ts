@@ -1,6 +1,7 @@
 import Piece from "../Piece"
 import Board from "../Board"
 import Position from "../Position"
+import Optional from "../utils/Optional"
 
 class Pawn extends Piece {
   public constructor(code: number, position: Position) {
@@ -27,10 +28,10 @@ class Pawn extends Piece {
       )
       .filter((position) => position.isWithinBoundary())
       .filter((position) =>
-        board
-          .getPieces()
-          .filter((piece) => piece.getPosition().equals(position))
-          .every((piece) => piece.isRed() !== isRed)
+        Optional.ofNullable(board.getPieceByPosition(position))
+          .or(() => Optional.of(this))
+          .filter((piece) => piece === this || piece.isRed() !== isRed)
+          .isPresent()
       )
       .filter(
         (position) =>
