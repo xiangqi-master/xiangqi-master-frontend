@@ -15,9 +15,7 @@ class Board {
   }
 
   public move(startPosition: Position, endPosition: Position): Board {
-    return Optional.ofNullable(
-      this.pieces.find((piece) => piece.getPosition().equals(startPosition))
-    )
+    return Optional.ofNullable(this.getPieceByPosition(startPosition))
       .map(
         (pieceToMove: Piece) =>
           new Board(
