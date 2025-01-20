@@ -2,6 +2,9 @@ import { Chalk, ChalkInstance } from "chalk"
 import Board from "../Board"
 import Piece from "../Piece"
 
+/**
+ * A UI class to handle all printing.
+ */
 class Ui {
   private chalk: ChalkInstance
   private print = console.log
@@ -10,6 +13,11 @@ class Ui {
     this.chalk = new Chalk({ level: colorSupportEnabled ? 3 : 0 })
   }
 
+  /**
+   * Prints out the current checkerboard.
+   *
+   * @param board the checkerboard to be printed
+   */
   public printBoard(board: Board): void {
     const noOfRows = 10,
       noOfCols = 9

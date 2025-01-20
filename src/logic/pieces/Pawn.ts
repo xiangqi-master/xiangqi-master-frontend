@@ -3,6 +3,9 @@ import Board from "../Board"
 import Position from "../Position"
 import Optional from "../utils/Optional"
 
+/**
+ * A class to represent a pawn on a checkerboard.
+ */
 class Pawn extends Piece {
   public constructor(code: number, position: Position) {
     super(code, position)

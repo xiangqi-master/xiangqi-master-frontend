@@ -1,3 +1,6 @@
+/**
+ * A class to represent the position of a piece on the checkerboard.
+ */
 class Position {
   private readonly x: number
   private readonly y: number
@@ -19,6 +22,9 @@ class Position {
     return this.y
   }
 
+  /**
+   * Checks if the position of the piece is within the boundary of the checkerboard.
+   */
   public isWithinBoundary(): boolean {
     if (this.x < 0 || this.y < 0) {
       return false
@@ -27,6 +33,11 @@ class Position {
     return !(this.x >= 9 || this.y >= 10)
   }
 
+  /**
+   * Checks if the position of the piece has crossed the river of the checkerboard.
+   *
+   * @param isRed whether the piece is red or it is black
+   */
   public isCrossRiver(isRed: boolean): boolean {
     if (isRed) return this.y >= 5
     return this.y <= 4

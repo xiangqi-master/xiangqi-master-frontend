@@ -3,6 +3,9 @@ import Position from "./Position"
 import { Set, is } from "immutable"
 import Optional from "./utils/Optional"
 
+/**
+ * The checkerboard that contains statuses of all pieces.
+ */
 class Board {
   private readonly pieces: Set<Piece>
 
@@ -14,6 +17,13 @@ class Board {
     }
   }
 
+  /**
+   * Moves a piece given by its position to another position on the checkerboard. This method **does not verify**
+   * if this move is valid.
+   *
+   * @param startPosition the position of the piece to be moved
+   * @param endPosition the new position to move to
+   */
   public move(startPosition: Position, endPosition: Position): Board {
     return Optional.ofNullable(this.getPieceByPosition(startPosition))
       .map(
@@ -28,6 +38,11 @@ class Board {
       .orElseGet(() => new Board(this.pieces))
   }
 
+  /**
+   * Finds the piece given by its position.
+   *
+   * @param position the position of the piece to be found
+   */
   public getPieceByPosition(position: Position): Piece | undefined {
     return this.pieces.find((piece) => piece.getPosition().equals(position))
   }
@@ -36,6 +51,11 @@ class Board {
     return this.pieces
   }
 
+  /**
+   * Adds a new piece to the checkerboard.
+   *
+   * @param piece the new piece to be added
+   */
   public addPiece(piece: Piece): Board {
     const newPieces: Set<Piece> = this.pieces.add(piece)
     return new Board(newPieces)

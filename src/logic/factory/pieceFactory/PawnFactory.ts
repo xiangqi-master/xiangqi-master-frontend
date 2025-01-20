@@ -3,6 +3,9 @@ import PieceFactory from "../PieceFactory"
 import Pawn from "../../pieces/Pawn"
 import PieceType from "../PieceType"
 
+/**
+ * A class to represent a factory to create a pawn.
+ */
 class PawnFactory extends PieceFactory {
   constructor() {
     super(PieceType.PAWN)
