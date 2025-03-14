@@ -2,6 +2,8 @@
  * A class to represent the position of a piece on the checkerboard.
  */
 class Position {
+  public static ROWS = 10
+  public static COLS = 9
   private readonly x: number
   private readonly y: number
 
@@ -30,7 +32,7 @@ class Position {
       return false
     }
 
-    return !(this.x >= 9 || this.y >= 10)
+    return !(this.x >= Position.COLS || this.y >= Position.ROWS)
   }
 
   /**

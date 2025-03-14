@@ -3,17 +3,28 @@ import Position from "../../../src/logic/Position"
 describe("Test: isWithinBoundary", () => {
   it("valid boundary positions", () => {
     expect(new Position(0, 0).isWithinBoundary()).toBeTruthy()
-    expect(new Position(0, 9).isWithinBoundary()).toBeTruthy()
-    expect(new Position(8, 0).isWithinBoundary()).toBeTruthy()
-    expect(new Position(8, 9).isWithinBoundary()).toBeTruthy()
+    expect(new Position(0, Position.ROWS - 1).isWithinBoundary()).toBeTruthy()
+    expect(new Position(Position.COLS - 1, 0).isWithinBoundary()).toBeTruthy()
+    expect(
+      new Position(Position.COLS - 1, Position.ROWS - 1).isWithinBoundary()
+    ).toBeTruthy()
   })
 
   it("invalid boundary positions", () => {
     expect(new Position(0, -1).isWithinBoundary()).toBeFalsy()
-    expect(new Position(0, -1).isWithinBoundary()).toBeFalsy()
-    expect(new Position(0, -1).isWithinBoundary()).toBeFalsy()
-    expect(new Position(0, 10).isWithinBoundary()).toBeFalsy()
-    expect(new Position(9, 0).isWithinBoundary()).toBeFalsy()
+    expect(new Position(-1, 0).isWithinBoundary()).toBeFalsy()
+    expect(new Position(-1, -1).isWithinBoundary()).toBeFalsy()
+    expect(new Position(Position.COLS, 0).isWithinBoundary()).toBeFalsy()
+    expect(new Position(0, Position.ROWS).isWithinBoundary()).toBeFalsy()
+    expect(
+      new Position(Position.COLS, Position.ROWS).isWithinBoundary()
+    ).toBeFalsy()
+    expect(
+      new Position(0, Number.POSITIVE_INFINITY).isWithinBoundary()
+    ).toBeFalsy()
+    expect(
+      new Position(Number.POSITIVE_INFINITY, 0).isWithinBoundary()
+    ).toBeFalsy()
   })
 })
 
