@@ -13,14 +13,12 @@ class Advisor extends Piece {
 
   public override getAllValidMoves(board: Board): Position[] {
     const isRed: boolean = super.isRed()
-    // const forwardDirection: 1 | -1 = isRed ? 1 : -1
     const moveDirections: number[][] = [
       [1, 1],
       [-1, 1],
       [1, -1],
       [-1, -1]
     ]
-    // const invalidXCoordinates: number[] = [1, 3, 5, 7]
 
     return (
       moveDirections
