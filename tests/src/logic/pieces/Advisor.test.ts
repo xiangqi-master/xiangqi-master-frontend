@@ -76,7 +76,7 @@ describe("Advisor in an empty board", () => {
   })
 
   test("red advisor at (3, 2)", () => {
-    const advisor = createAdvisor(true, new Position(5, 2))
+    const advisor = createAdvisor(true, new Position(3, 2))
     const board = emptyBoard.addPiece(advisor)
     let expectedValidMoves: Position[] = [new Position(4, 1)]
     let actualMoves: Position[] = advisor.getAllValidMoves(board)
@@ -161,7 +161,7 @@ describe("Advisor surrounded by obstacles", () => {
   })
 
   test("red advisor at (5, 0) surrounded by 1 black pawn", () => {
-    const advisor = createAdvisor(true, new Position(3, 0))
+    const advisor = createAdvisor(true, new Position(5, 0))
     const board = emptyBoard.addPiece(createPawnStub(false, new Position(4, 1)))
     let expectedValidMoves: Position[] = [new Position(4, 1)]
     let actualMoves: Position[] = advisor.getAllValidMoves(board)
