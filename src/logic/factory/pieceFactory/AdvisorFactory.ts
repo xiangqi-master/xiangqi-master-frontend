@@ -4,7 +4,7 @@ import Advisor from "../../pieces/Advisor"
 import PieceType from "../PieceType"
 
 /**
- * A class to represent a factory to create a pawn.
+ * A class to represent a factory to create an advisor.
  */
 class AdvisorFactory extends PieceFactory {
   constructor() {
