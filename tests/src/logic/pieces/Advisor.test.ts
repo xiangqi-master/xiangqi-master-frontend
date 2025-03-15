@@ -97,6 +97,22 @@ describe("Advisor in an empty board", () => {
     ).toBeTruthy()
   })
 
+  test("red advisor at (4, 1)", () => {
+    const advisor = createAdvisor(true, new Position(4, 1))
+    const board = emptyBoard.addPiece(advisor)
+    let expectedValidMoves: Position[] = [
+      new Position(3, 0),
+      new Position(3, 2),
+      new Position(5, 2),
+      new Position(5, 0)
+    ]
+    let actualMoves: Position[] = advisor.getAllValidMoves(board)
+    expect(expectedValidMoves).toHaveLength(actualMoves.length)
+    expect(
+      expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
+    ).toBeTruthy()
+  })
+
   // black advisor
   test("black advisor at (3, 9)", () => {
     const advisor = createAdvisor(true, new Position(3, 9))
