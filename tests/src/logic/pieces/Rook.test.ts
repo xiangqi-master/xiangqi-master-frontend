@@ -5,6 +5,7 @@ import Position from "../../../../src/logic/Position"
 
 // import { PawnStub, RookStub, HorseStub } from "../../../../src/logic/utils/StubPieces"
 import { PawnStub } from "../Piece.test"
+//1
 
 function createRook(isRed: boolean, position: Position): Rook {
   const code = 6
