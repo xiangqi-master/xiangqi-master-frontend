@@ -2,7 +2,6 @@ import PieceFactory from "../../../../src/logic/factory/PieceFactory"
 import Position from "../../../../src/logic/Position"
 import Piece from "../../../../src/logic/Piece"
 import Pawn from "../../../../src/logic/pieces/Pawn"
-import Rook from "../../../../src/logic/pieces/Rook"
 
 class ConvertPieceCodeTest extends PieceFactory {
   constructor(code: number) {
@@ -12,10 +11,6 @@ class ConvertPieceCodeTest extends PieceFactory {
   createPiece(_isRed: boolean, _position: Position): Piece {
     return new Pawn(0, new Position(0, 0))
   }
-
-  // createRook(_isRed: boolean, _position: Position): Piece {
-  //   return new Rook(0, new Position(0, 0))
-  // }
 
   public test(isRed: boolean): number {
     return super.convertPieceCode(isRed)

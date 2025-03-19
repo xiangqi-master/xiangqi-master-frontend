@@ -2,7 +2,7 @@ import Piece from "../../../src/logic/Piece"
 import Board from "../../../src/logic/Board"
 import Position from "../../../src/logic/Position"
 
-export class PawnStub extends Piece {
+class PawnStub extends Piece {
   public constructor(code: number, position: Position) {
     super(code, position)
   }
@@ -16,7 +16,7 @@ export class PawnStub extends Piece {
   }
 }
 
-export class HorseStub extends Piece {
+class HorseStub extends Piece {
   public constructor(code: number, position: Position) {
     super(code, position)
   }
@@ -27,20 +27,6 @@ export class HorseStub extends Piece {
 
   toString(): string {
     return "H"
-  }
-}
-
-export class RookStub extends Piece {
-  public constructor(code: number, position: Position) {
-    super(code, position)
-  }
-
-  getAllValidMoves(_board: Board): Position[] {
-    return []
-  }
-
-  toString(): string {
-    return "R"
   }
 }
 
@@ -60,76 +46,48 @@ describe("isRed", () => {
     const piece2 = new PawnStub(100, new Position(0, 0))
     expect(piece2.isRed()).toBeFalsy()
   })
-
-  it("Rook isRed === true", () => {
-    const piece1 = new RookStub(9, new Position(0, 0))
-    expect(piece1.isRed()).toBeTruthy()
-
-    const piece2 = new RookStub(-1, new Position(0, 0))
-    expect(piece2.isRed()).toBeTruthy()
-  })
-
-  it("Rook isRed === false", () => {
-    const piece1 = new RookStub(10, new Position(0, 0))
-    expect(piece1.isRed()).toBeFalsy()
-
-    const piece2 = new RookStub(100, new Position(0, 0))
-    expect(piece2.isRed()).toBeFalsy()
-  })
 })
 
 describe("equals", () => {
-  it("Pawn: Null values", () => {
+  it("Null values", () => {
     const pawn = new PawnStub(0, new Position(0, 0))
     // @ts-ignore
     expect(pawn.equals(null)).toBeFalsy()
   })
 
-  it("Rook: Null values", () => {
-    const rook = new RookStub(0, new Position(0, 0))
-    // @ts-ignore
-    expect(rook.equals(null)).toBeFalsy()
-  })
-
-  it("Pawn: Undefined values", () => {
+  it("Undefined values", () => {
     const pawn = new PawnStub(0, new Position(0, 0))
     // @ts-ignore
     expect(pawn.equals(undefined)).toBeFalsy()
   })
 
-  it("Rook: Undefined values", () => {
-    const rook = new RookStub(0, new Position(0, 0))
-    // @ts-ignore
-    expect(rook.equals(undefined)).toBeFalsy()
-  })
-
-  it("Pawn: Different instances but same values", () => {
+  it("Different instances but same values", () => {
     const pawn = new PawnStub(2, new Position(2, 3))
-    const rook = new RookStub(2, new Position(2, 3))
-    expect(pawn.equals(rook)).toBeFalsy()
+    const horse = new HorseStub(2, new Position(2, 3))
+    expect(pawn.equals(horse)).toBeFalsy()
   })
 
-  it("Rook: Different instances but same values", () => {
-    const rook1 = new RookStub(2, new Position(2, 3))
-    const pawn = new PawnStub(2, new Position(2, 3))
-    expect(rook1.equals(pawn)).toBeFalsy()
-  })
-
-  it("Pawn: Same code and same position", () => {
+  it("Same code and same position", () => {
     const pawn1 = new PawnStub(2, new Position(2, 3))
     const pawn2 = new PawnStub(2, new Position(2, 3))
     expect(pawn1.equals(pawn2)).toBeTruthy()
   })
 
-  it("Rook: Same code and same position", () => {
-    const rook1 = new RookStub(2, new Position(2, 3))
-    const rook2 = new RookStub(2, new Position(2, 3))
-    expect(rook1.equals(rook2)).toBeTruthy()
+  it("Same code but different positions", () => {
+    const pawn1 = new PawnStub(2, new Position(2, 3))
+    const pawn2 = new PawnStub(2, new Position(2, 4))
+    expect(pawn1.equals(pawn2)).toBeFalsy()
+  })
+
+  it("Different code but same position", () => {
+    const pawn1 = new PawnStub(2, new Position(2, 3))
+    const pawn2 = new PawnStub(0, new Position(2, 3))
+    expect(pawn1.equals(pawn2)).toBeFalsy()
   })
 })
 
 describe("move", () => {
-  it("Pawn: Preservation of immutability", () => {
+  it("Preservation of immutability", () => {
     const pieceCode: number = 2
     const position: Position = new Position(0, 2)
     const pawn = new PawnStub(pieceCode, position)
@@ -140,20 +98,6 @@ describe("move", () => {
     const expectedPiece: Piece = new PawnStub(pieceCode, newPosition)
 
     expect(pawn.equals(expectedPawn)).toBeTruthy()
-    expect(actualPiece.equals(expectedPiece)).toBeTruthy()
-  })
-
-  it("Rook: Preservation of immutability", () => {
-    const pieceCode: number = 2
-    const position: Position = new Position(0, 2)
-    const rook = new RookStub(pieceCode, position)
-    const expectedRook = new RookStub(pieceCode, position)
-
-    const newPosition: Position = new Position(5, 4)
-    const actualPiece: Piece = rook.move(newPosition)
-    const expectedPiece: Piece = new RookStub(pieceCode, newPosition)
-
-    expect(rook.equals(expectedRook)).toBeTruthy()
     expect(actualPiece.equals(expectedPiece)).toBeTruthy()
   })
 })

@@ -2,10 +2,22 @@ import Rook from "../../../../src/logic/pieces/Rook"
 import Pawn from "../../../../src/logic/pieces/Pawn"
 import Board from "../../../../src/logic/Board"
 import Position from "../../../../src/logic/Position"
+import Piece from "../../../../src/logic/Piece"
 
-// import { PawnStub, RookStub, HorseStub } from "../../../../src/logic/utils/StubPieces"
-import { PawnStub } from "../Piece.test"
-//1
+class PawnStub extends Piece {
+  public constructor(code: number, position: Position) {
+    super(code, position)
+  }
+
+  getAllValidMoves(_board: Board): Position[] {
+    return []
+  }
+
+  toString(): string {
+    return "P"
+  }
+}
+
 
 function createRook(isRed: boolean, position: Position): Rook {
   const code = 6
