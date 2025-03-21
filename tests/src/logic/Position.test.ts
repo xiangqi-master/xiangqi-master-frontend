@@ -2,28 +2,38 @@ import Position from "../../../src/logic/Position"
 
 describe("Test: isWithinBoundary", () => {
   it("valid boundary positions", () => {
-    expect(new Position(0, 0).isWithinBoundary()).toBeTruthy()
-    expect(new Position(0, Position.ROWS - 1).isWithinBoundary()).toBeTruthy()
-    expect(new Position(Position.COLS - 1, 0).isWithinBoundary()).toBeTruthy()
+    expect(
+      new Position(Position.START, Position.START).isWithinBoundary()
+    ).toBeTruthy()
+    expect(
+      new Position(Position.START, Position.ROWS - 1).isWithinBoundary()
+    ).toBeTruthy()
+    expect(
+      new Position(Position.COLS - 1, Position.START).isWithinBoundary()
+    ).toBeTruthy()
     expect(
       new Position(Position.COLS - 1, Position.ROWS - 1).isWithinBoundary()
     ).toBeTruthy()
   })
 
   it("invalid boundary positions", () => {
-    expect(new Position(0, -1).isWithinBoundary()).toBeFalsy()
-    expect(new Position(-1, 0).isWithinBoundary()).toBeFalsy()
+    expect(new Position(Position.START, -1).isWithinBoundary()).toBeFalsy()
+    expect(new Position(-1, Position.START).isWithinBoundary()).toBeFalsy()
     expect(new Position(-1, -1).isWithinBoundary()).toBeFalsy()
-    expect(new Position(Position.COLS, 0).isWithinBoundary()).toBeFalsy()
-    expect(new Position(0, Position.ROWS).isWithinBoundary()).toBeFalsy()
+    expect(
+      new Position(Position.COLS, Position.START).isWithinBoundary()
+    ).toBeFalsy()
+    expect(
+      new Position(Position.START, Position.ROWS).isWithinBoundary()
+    ).toBeFalsy()
     expect(
       new Position(Position.COLS, Position.ROWS).isWithinBoundary()
     ).toBeFalsy()
     expect(
-      new Position(0, Number.POSITIVE_INFINITY).isWithinBoundary()
+      new Position(Position.START, Number.POSITIVE_INFINITY).isWithinBoundary()
     ).toBeFalsy()
     expect(
-      new Position(Number.POSITIVE_INFINITY, 0).isWithinBoundary()
+      new Position(Number.POSITIVE_INFINITY, Position.START).isWithinBoundary()
     ).toBeFalsy()
   })
 })
@@ -53,26 +63,28 @@ describe("Test: isCrossRiver", () => {
 
 describe("Test: isCrossRiver", () => {
   it("isRed === true && isCrossRiver === true", () => {
-    expect(new Position(0, 5).isCrossRiver(true)).toBeTruthy()
-    expect(new Position(0, 100).isCrossRiver(true)).toBeTruthy()
+    expect(new Position(Position.START, 5).isCrossRiver(true)).toBeTruthy()
+    expect(new Position(Position.START, 100).isCrossRiver(true)).toBeTruthy()
     expect(new Position(100, 5).isCrossRiver(true)).toBeTruthy()
   })
 
   it("isRed === true && isCrossRiver === false", () => {
-    expect(new Position(0, 4).isCrossRiver(true)).toBeFalsy()
+    expect(new Position(Position.START, 4).isCrossRiver(true)).toBeFalsy()
     expect(new Position(-100, 4).isCrossRiver(true)).toBeFalsy()
-    expect(new Position(0, 0).isCrossRiver(true)).toBeFalsy()
+    expect(
+      new Position(Position.START, Position.START).isCrossRiver(true)
+    ).toBeFalsy()
   })
 
   it("isRed === false && isCrossRiver === true", () => {
-    expect(new Position(0, 4).isCrossRiver(false)).toBeTruthy()
+    expect(new Position(Position.START, 4).isCrossRiver(false)).toBeTruthy()
     expect(new Position(100, 4).isCrossRiver(false)).toBeTruthy()
-    expect(new Position(0, -1).isCrossRiver(false)).toBeTruthy()
+    expect(new Position(Position.START, -1).isCrossRiver(false)).toBeTruthy()
   })
 
   it("isRed === false && isCrossRiver === false", () => {
-    expect(new Position(0, 5).isCrossRiver(false)).toBeFalsy()
-    expect(new Position(0, 100).isCrossRiver(false)).toBeFalsy()
+    expect(new Position(Position.START, 5).isCrossRiver(false)).toBeFalsy()
+    expect(new Position(Position.START, 100).isCrossRiver(false)).toBeFalsy()
     expect(new Position(100, 5).isCrossRiver(false)).toBeFalsy()
   })
 })
