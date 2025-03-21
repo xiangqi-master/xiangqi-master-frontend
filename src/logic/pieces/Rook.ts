@@ -1,7 +1,6 @@
 import Piece from "../Piece"
 import Board from "../Board"
 import Position from "../Position"
-import Optional from "../utils/Optional"
 
 class Rook extends Piece {
   public constructor(code: number, position: Position) {
