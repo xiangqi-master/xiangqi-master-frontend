@@ -34,7 +34,7 @@ class Position {
       return false
     }
 
-    return !(this.x >= Position.COLS || this.y >= Position.ROWS)
+    return this.x < Position.COLS && this.y < Position.ROWS
   }
 
   /**
