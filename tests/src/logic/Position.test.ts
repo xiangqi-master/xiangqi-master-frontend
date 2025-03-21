@@ -40,29 +40,6 @@ describe("Test: isWithinBoundary", () => {
 
 describe("Test: isCrossRiver", () => {
   it("isRed === true && isCrossRiver === true", () => {
-    expect(new Position(0, 5).isCrossRiver(true)).toBeTruthy()
-    expect(new Position(0, 10).isCrossRiver(true)).toBeTruthy()
-    expect(new Position(-1, 5).isCrossRiver(true)).toBeTruthy()
-  })
-
-  it("isRed === true && isCrossRiver === false", () => {
-    expect(new Position(0, 4).isCrossRiver(true)).toBeFalsy()
-    expect(new Position(0, -1).isCrossRiver(true)).toBeFalsy()
-  })
-
-  it("isRed === false && isCrossRiver === true", () => {
-    expect(new Position(100, 4).isCrossRiver(false)).toBeTruthy()
-    expect(new Position(0, -1).isCrossRiver(false)).toBeTruthy()
-  })
-
-  it("isRed === false && isCrossRiver === false", () => {
-    expect(new Position(0, 5).isCrossRiver(false)).toBeFalsy()
-    expect(new Position(0, 100).isCrossRiver(false)).toBeFalsy()
-  })
-})
-
-describe("Test: isCrossRiver", () => {
-  it("isRed === true && isCrossRiver === true", () => {
     expect(new Position(Position.START, 5).isCrossRiver(true)).toBeTruthy()
     expect(new Position(Position.START, 100).isCrossRiver(true)).toBeTruthy()
     expect(new Position(100, 5).isCrossRiver(true)).toBeTruthy()
