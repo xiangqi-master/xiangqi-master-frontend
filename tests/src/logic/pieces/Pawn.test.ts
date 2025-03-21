@@ -7,7 +7,7 @@ function createPawn(isRed: boolean, position: Position): Pawn {
   return new Pawn(isRed ? code : code + 10, position)
 }
 
-describe("Test: Pawn in an empty board", () => {
+describe("Pawn in an empty board", () => {
   let emptyBoard: Board
   beforeAll(() => {
     emptyBoard = new Board([])
@@ -118,7 +118,7 @@ describe("Test: Pawn in an empty board", () => {
   })
 })
 
-describe("Test: Pawn surrounded obstacles", () => {
+describe("Pawn surrounded obstacles", () => {
   let emptyBoard: Board
   beforeAll(() => {
     emptyBoard = new Board([])

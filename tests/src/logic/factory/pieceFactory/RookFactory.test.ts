@@ -2,7 +2,7 @@ import RookFactory from "../../../../../src/logic/factory/pieceFactory/RookFacto
 import Position from "../../../../../src/logic/Position"
 import Rook from "../../../../../src/logic/pieces/Rook"
 
-describe("Test: RookFactory", () => {
+describe("RookFactory", () => {
   test("isRed === true", () => {
     const position = new Position(6, 8)
     const rook = new RookFactory().createPiece(true, position)

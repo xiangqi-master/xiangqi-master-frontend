@@ -17,7 +17,7 @@ class ConvertPieceCodeTest extends PieceFactory {
   }
 }
 
-describe("Test: convertPieceCode", () => {
+describe("convertPieceCode", () => {
   test("isRed === true", () => {
     expect(new ConvertPieceCodeTest(0).test(true)).toBe(0)
     expect(new ConvertPieceCodeTest(10).test(true)).toBe(10)

@@ -2,7 +2,7 @@ import PawnFactory from "../../../../../src/logic/factory/pieceFactory/PawnFacto
 import Position from "../../../../../src/logic/Position"
 import Pawn from "../../../../../src/logic/pieces/Pawn"
 
-describe("Test: PawnFactory", () => {
+describe("PawnFactory", () => {
   test("isRed === true", () => {
     const position = new Position(6, 8)
     const pawn = new PawnFactory().createPiece(true, position)

@@ -23,7 +23,7 @@ function createRook(isRed: boolean, position: Position): Rook {
   return new Rook(isRed ? code : code + 10, position)
 }
 
-describe("Test: Rook in an empty board", () => {
+describe("Rook in an empty board", () => {
   let emptyBoard: Board
   beforeAll(() => {
     emptyBoard = new Board([])
@@ -213,7 +213,7 @@ describe("Rook movement logic", () => {
     emptyBoard = new Board([])
   })
 
-  describe("Test: Rook surrounded by obstacles", () => {
+  describe("Rook surrounded by obstacles", () => {
     let emptyBoard: Board
     beforeAll(() => {
       emptyBoard = new Board([])
