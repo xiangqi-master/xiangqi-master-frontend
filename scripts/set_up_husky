@@ -1,0 +1,23 @@
+#!/bin/bash
+
+if [[ ! -e .husky ]]; then
+  npx husky
+fi
+
+if [[ ! -e .husky/pre-commit ]]; then
+    echo "Created pre-commit under .husky/pre-commit"
+    touch .husky/pre-commit
+fi
+
+if [[ ! -e .husky/pre-push ]]; then
+    echo "Created pre-push under .husky/pre-push"
+    touch .husky/pre-push
+fi
+
+echo "npx lint-staged" > .husky/pre-commit
+echo -e "npx lint-staged\nnpm test" > .husky/pre-push
+
+chmod +x .husky/pre-commit
+chmod +x .husky/pre-push
+
+echo "husky set up successfully!"

@@ -3,16 +3,16 @@ name: linter
 on: [push, pull_request]
 
 jobs:
-  lint:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
-          node-version: '18'
-      - name: npm install
-        run: npm install -D
+          node-version: '18.20.5'
+      - name: install dependencies
+        run: npm ci
       - name: run ESLint
-        run: npm run lint:fix
+        run: npx eslint --fix --ext .js,.jsx,.ts,.tsx ./src/
       - name: run test cases
         run: npm run test
