@@ -30,7 +30,7 @@ describe("Test: Rook in an empty board", () => {
   })
 
   // red rook
-  it("red rook at (0, 0)", () => {
+  test("red rook at (0, 0)", () => {
     const rook = createRook(true, new Position(0, 0))
     const board = emptyBoard.addPiece(rook)
     let expectedValidMoves: Position[] = [
@@ -59,7 +59,7 @@ describe("Test: Rook in an empty board", () => {
     ).toBeTruthy()
   })
 
-  it("red rook at (4, 5)", () => {
+  test("red rook at (4, 5)", () => {
     const rook = createRook(true, new Position(4, 5))
     const board = emptyBoard.addPiece(rook)
     let expectedValidMoves: Position[] = [
@@ -88,7 +88,7 @@ describe("Test: Rook in an empty board", () => {
     ).toBeTruthy()
   })
 
-  it("red rook at (8, 9)", () => {
+  test("red rook at (8, 9)", () => {
     const rook = createRook(true, new Position(8, 9))
     const board = emptyBoard.addPiece(rook)
     let expectedValidMoves: Position[] = [
@@ -118,7 +118,7 @@ describe("Test: Rook in an empty board", () => {
   })
 
   // black rook
-  it("black rook at (0, 9)", () => {
+  test("black rook at (0, 9)", () => {
     const rook = createRook(false, new Position(0, 9))
     const board = emptyBoard.addPiece(rook)
     let expectedValidMoves: Position[] = [
@@ -147,7 +147,7 @@ describe("Test: Rook in an empty board", () => {
     ).toBeTruthy()
   })
 
-  it("black rook at (4, 4)", () => {
+  test("black rook at (4, 4)", () => {
     const rook = createRook(false, new Position(4, 4))
     const board = emptyBoard.addPiece(rook)
     let expectedValidMoves: Position[] = [
@@ -176,7 +176,7 @@ describe("Test: Rook in an empty board", () => {
     ).toBeTruthy()
   })
 
-  it("black rook at (8, 0)", () => {
+  test("black rook at (8, 0)", () => {
     const rook = createRook(false, new Position(8, 0))
     const board = emptyBoard.addPiece(rook)
     let expectedValidMoves: Position[] = [
@@ -220,7 +220,7 @@ describe("Rook movement logic", () => {
     })
 
     //one firend piece
-    it("rook at (4,4) blocked by one friendly piece", () => {
+    test("rook at (4,4) blocked by one friendly piece", () => {
       const rook = new Rook(6, new Position(4, 4))
       const board = emptyBoard
         .addPiece(rook)
@@ -251,7 +251,7 @@ describe("Rook movement logic", () => {
       ).toBeTruthy()
     })
 
-    it("rook at (4,4) blocked above by friendly piece", () => {
+    test("rook at (4,4) blocked above by friendly piece", () => {
       const rook = new Rook(6, new Position(4, 4))
       const board = emptyBoard
         .addPiece(rook)
@@ -282,7 +282,7 @@ describe("Rook movement logic", () => {
     })
 
     //4 friend pieces
-    it("rook at (4,4) surrounded by friendly pieces", () => {
+    test("rook at (4,4) surrounded by friendly pieces", () => {
       const rook = new Rook(6, new Position(4, 4))
       const board = emptyBoard
         .addPiece(rook)
@@ -301,7 +301,7 @@ describe("Rook movement logic", () => {
     })
 
     //two friend pieces
-    it("rook at (4,4) blocked by two friendly pieces", () => {
+    test("rook at (4,4) blocked by two friendly pieces", () => {
       const rook = new Rook(6, new Position(4, 4))
       const board = emptyBoard
         .addPiece(rook)
@@ -333,7 +333,7 @@ describe("Rook movement logic", () => {
     })
 
     //three friend pieces
-    it("rook at (4,4) blocked by three friendly pieces", () => {
+    test("rook at (4,4) blocked by three friendly pieces", () => {
       const rook = new Rook(6, new Position(4, 4))
       const board = emptyBoard
         .addPiece(rook)
@@ -362,7 +362,7 @@ describe("Rook movement logic", () => {
       ).toBeTruthy()
     })
     //3 pawn
-    it("rook at (4,4) blocked by three friendly pawns", () => {
+    test("rook at (4,4) blocked by three friendly pawns", () => {
       const rook = new Rook(6, new Position(4, 4))
       const board = emptyBoard
         .addPiece(rook)
@@ -391,7 +391,7 @@ describe("Rook movement logic", () => {
       ).toBeTruthy()
     })
     //3 pawnstub
-    it("rook at (4,4) blocked by three friendly pawns", () => {
+    test("rook at (4,4) blocked by three friendly pawns", () => {
       const rook = new Rook(6, new Position(4, 4))
       const board = emptyBoard
         .addPiece(rook)
@@ -421,7 +421,7 @@ describe("Rook movement logic", () => {
     })
 
     //4 opponents
-    it("rook at (4,4) surrounded by opponent pieces", () => {
+    test("rook at (4,4) surrounded by opponent pieces", () => {
       const rook = new Rook(6, new Position(4, 4))
       const board = emptyBoard
         .addPiece(rook)
@@ -445,7 +445,7 @@ describe("Rook movement logic", () => {
     })
   })
 
-  it("rook at (4,4) blocked by four opponent pieces", () => {
+  test("rook at (4,4) blocked by four opponent pieces", () => {
     const rook = new Rook(6, new Position(4, 4))
     const board = emptyBoard
       .addPiece(rook)
