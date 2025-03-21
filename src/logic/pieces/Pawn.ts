@@ -40,7 +40,7 @@ class Pawn extends Piece {
       .filter(
         // Prevent Pawn from moving left or right before crossing the river
         (position) =>
-          position.isCrossRiver(isRed) ||
+          position.hasCrossedRiver(isRed) ||
           !invalidXCoordinates.some(
             (invalidXCoordinate) => invalidXCoordinate === position.getX()
           )
