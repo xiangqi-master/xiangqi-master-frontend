@@ -127,8 +127,8 @@ describe("Test: Pawn surrounded obstacles", () => {
   it("red pawn at (2, 6) with two obstacles", () => {
     const pawn = createPawn(true, new Position(2, 6))
     const board = emptyBoard
-      .addPiece(new Pawn(6, new Position(1, 6)))
-      .addPiece(new Pawn(6, new Position(3, 6)))
+      .addPiece(createPawn(true, new Position(1, 6)))
+      .addPiece(createPawn(true, new Position(3, 6)))
     let expectedValidMoves: Position[] = [new Position(2, 7)]
     let actualMoves: Position[] = pawn.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
@@ -140,8 +140,8 @@ describe("Test: Pawn surrounded obstacles", () => {
   it("black pawn at (6,2) with one obstacle", () => {
     const pawn = createPawn(false, new Position(6, 2))
     const board = emptyBoard
-      .addPiece(new Pawn(16, new Position(6, 1)))
-      .addPiece(new Pawn(6, new Position(5, 2)))
+      .addPiece(createPawn(false, new Position(6, 1)))
+      .addPiece(createPawn(true, new Position(5, 2)))
     let expectedValidMoves: Position[] = [
       new Position(5, 2),
       new Position(7, 2)
@@ -156,9 +156,9 @@ describe("Test: Pawn surrounded obstacles", () => {
   it("black pawn at (6,2) with three obstacles", () => {
     const pawn = createPawn(false, new Position(6, 2))
     const board = emptyBoard
-      .addPiece(new Pawn(16, new Position(6, 1)))
-      .addPiece(new Pawn(16, new Position(5, 2)))
-      .addPiece(new Pawn(16, new Position(7, 2)))
+      .addPiece(createPawn(false, new Position(6, 1)))
+      .addPiece(createPawn(false, new Position(5, 2)))
+      .addPiece(createPawn(false, new Position(7, 2)))
     let expectedValidMoves: Position[] = []
     let actualMoves: Position[] = pawn.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
@@ -173,14 +173,14 @@ describe("Test (Pawn): Immutability of board", () => {
   const pawn = createPawn(true, new Position(6, 2))
 
   const board = emptyBoard
-    .addPiece(new Pawn(16, new Position(6, 1)))
-    .addPiece(new Pawn(16, new Position(5, 2)))
-    .addPiece(new Pawn(16, new Position(7, 2)))
+    .addPiece(createPawn(false, new Position(6, 1)))
+    .addPiece(createPawn(false, new Position(5, 2)))
+    .addPiece(createPawn(false, new Position(7, 2)))
 
   const expectedBoard = emptyBoard
-    .addPiece(new Pawn(16, new Position(6, 1)))
-    .addPiece(new Pawn(16, new Position(5, 2)))
-    .addPiece(new Pawn(16, new Position(7, 2)))
+    .addPiece(createPawn(false, new Position(6, 1)))
+    .addPiece(createPawn(false, new Position(5, 2)))
+    .addPiece(createPawn(false, new Position(7, 2)))
 
   pawn.getAllValidMoves(board)
   expect(expectedBoard.equals(board)).toBeTruthy()
