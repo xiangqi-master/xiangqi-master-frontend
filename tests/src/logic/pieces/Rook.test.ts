@@ -18,7 +18,6 @@ class PawnStub extends Piece {
   }
 }
 
-
 function createRook(isRed: boolean, position: Position): Rook {
   const code = 6
   return new Rook(isRed ? code : code + 10, position)
