@@ -2,8 +2,10 @@
  * A class to represent the position of a piece on the checkerboard.
  */
 class Position {
+  public static START = 0
   public static ROWS = 10
   public static COLS = 9
+
   private readonly x: number
   private readonly y: number
 
@@ -28,7 +30,7 @@ class Position {
    * Checks if the position of the piece is within the boundary of the checkerboard.
    */
   public isWithinBoundary(): boolean {
-    if (this.x < 0 || this.y < 0) {
+    if (this.x < Position.START || this.y < Position.START) {
       return false
     }
 
