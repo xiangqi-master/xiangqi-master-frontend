@@ -31,12 +31,14 @@ class Pawn extends Piece {
       )
       .filter((position) => position.isWithinBoundary())
       .filter((position) =>
+        // check if there is a piece
         Optional.ofNullable(board.getPieceByPosition(position))
           .or(() => Optional.of(this))
           .filter((piece) => piece === this || piece.isRed() !== isRed)
           .isPresent()
       )
       .filter(
+        // Prevent Pawn from moving left or right before crossing the river
         (position) =>
           position.isCrossRiver(isRed) ||
           !invalidXCoordinates.some(
