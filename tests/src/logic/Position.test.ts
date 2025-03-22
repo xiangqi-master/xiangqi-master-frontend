@@ -38,31 +38,31 @@ describe("Test: isWithinBoundary", () => {
   })
 })
 
-describe("Test: isCrossRiver", () => {
-  test("isRed === true && isCrossRiver === true", () => {
-    expect(new Position(Position.START, 5).isCrossRiver(true)).toBeTruthy()
-    expect(new Position(Position.START, 100).isCrossRiver(true)).toBeTruthy()
-    expect(new Position(100, 5).isCrossRiver(true)).toBeTruthy()
+describe("Test: hasCrossedRiver", () => {
+  test("isRed === true && hasCrossedRiver === true", () => {
+    expect(new Position(Position.START, 5).hasCrossedRiver(true)).toBeTruthy()
+    expect(new Position(Position.START, 100).hasCrossedRiver(true)).toBeTruthy()
+    expect(new Position(100, 5).hasCrossedRiver(true)).toBeTruthy()
   })
 
-  test("isRed === true && isCrossRiver === false", () => {
-    expect(new Position(Position.START, 4).isCrossRiver(true)).toBeFalsy()
-    expect(new Position(-100, 4).isCrossRiver(true)).toBeFalsy()
+  test("isRed === true && hasCrossedRiver === false", () => {
+    expect(new Position(Position.START, 4).hasCrossedRiver(true)).toBeFalsy()
+    expect(new Position(-100, 4).hasCrossedRiver(true)).toBeFalsy()
     expect(
-      new Position(Position.START, Position.START).isCrossRiver(true)
+      new Position(Position.START, Position.START).hasCrossedRiver(true)
     ).toBeFalsy()
   })
 
-  test("isRed === false && isCrossRiver === true", () => {
-    expect(new Position(Position.START, 4).isCrossRiver(false)).toBeTruthy()
-    expect(new Position(100, 4).isCrossRiver(false)).toBeTruthy()
-    expect(new Position(Position.START, -1).isCrossRiver(false)).toBeTruthy()
+  test("isRed === false && hasCrossedRiver === true", () => {
+    expect(new Position(Position.START, 4).hasCrossedRiver(false)).toBeTruthy()
+    expect(new Position(100, 4).hasCrossedRiver(false)).toBeTruthy()
+    expect(new Position(Position.START, -1).hasCrossedRiver(false)).toBeTruthy()
   })
 
-  test("isRed === false && isCrossRiver === false", () => {
-    expect(new Position(Position.START, 5).isCrossRiver(false)).toBeFalsy()
-    expect(new Position(Position.START, 100).isCrossRiver(false)).toBeFalsy()
-    expect(new Position(100, 5).isCrossRiver(false)).toBeFalsy()
+  test("isRed === false && hasCrossedRiver === false", () => {
+    expect(new Position(Position.START, 5).hasCrossedRiver(false)).toBeFalsy()
+    expect(new Position(Position.START, 100).hasCrossedRiver(false)).toBeFalsy()
+    expect(new Position(100, 5).hasCrossedRiver(false)).toBeFalsy()
   })
 })
 
