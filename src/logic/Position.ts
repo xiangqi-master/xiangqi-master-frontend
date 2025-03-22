@@ -2,9 +2,9 @@
  * A class to represent the position of a piece on the checkerboard.
  */
 class Position {
-  public static START = 0
-  public static ROWS = 10
-  public static COLS = 9
+  public static readonly START = 0
+  public static readonly ROWS = 10
+  public static readonly COLS = 9
 
   private readonly x: number
   private readonly y: number
