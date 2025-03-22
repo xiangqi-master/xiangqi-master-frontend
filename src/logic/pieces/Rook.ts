@@ -1,8 +1,10 @@
 import Piece from "../Piece"
 import Board from "../Board"
 import Position from "../Position"
-import Optional from "../utils/Optional"
 
+/**
+ * A class to represent a rook on a checkerboard.
+ */
 class Rook extends Piece {
   public constructor(code: number, position: Position) {
     super(code, position)

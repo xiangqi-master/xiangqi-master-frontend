@@ -42,7 +42,7 @@ class Position {
    *
    * @param isRed whether the piece is red or it is black
    */
-  public isCrossRiver(isRed: boolean): boolean {
+  public hasCrossedRiver(isRed: boolean): boolean {
     if (isRed) return this.y >= 5
     return this.y <= 4
   }

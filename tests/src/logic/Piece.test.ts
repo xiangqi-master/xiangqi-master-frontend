@@ -31,7 +31,7 @@ class HorseStub extends Piece {
 }
 
 describe("isRed", () => {
-  it("isRed === true", () => {
+  test("isRed === true", () => {
     const piece1 = new PawnStub(9, new Position(0, 0))
     expect(piece1.isRed()).toBeTruthy()
 
@@ -39,7 +39,7 @@ describe("isRed", () => {
     expect(piece2.isRed()).toBeTruthy()
   })
 
-  it("isRed === false", () => {
+  test("isRed === false", () => {
     const piece1 = new PawnStub(10, new Position(0, 0))
     expect(piece1.isRed()).toBeFalsy()
 
@@ -49,37 +49,37 @@ describe("isRed", () => {
 })
 
 describe("equals", () => {
-  it("Null values", () => {
+  test("Null values", () => {
     const pawn = new PawnStub(0, new Position(0, 0))
     // @ts-ignore
     expect(pawn.equals(null)).toBeFalsy()
   })
 
-  it("Undefined values", () => {
+  test("Undefined values", () => {
     const pawn = new PawnStub(0, new Position(0, 0))
     // @ts-ignore
     expect(pawn.equals(undefined)).toBeFalsy()
   })
 
-  it("Different instances but same values", () => {
+  test("Different instances but same values", () => {
     const pawn = new PawnStub(2, new Position(2, 3))
     const horse = new HorseStub(2, new Position(2, 3))
     expect(pawn.equals(horse)).toBeFalsy()
   })
 
-  it("Same code and same position", () => {
+  test("Same code and same position", () => {
     const pawn1 = new PawnStub(2, new Position(2, 3))
     const pawn2 = new PawnStub(2, new Position(2, 3))
     expect(pawn1.equals(pawn2)).toBeTruthy()
   })
 
-  it("Same code but different positions", () => {
+  test("Same code but different positions", () => {
     const pawn1 = new PawnStub(2, new Position(2, 3))
     const pawn2 = new PawnStub(2, new Position(2, 4))
     expect(pawn1.equals(pawn2)).toBeFalsy()
   })
 
-  it("Different code but same position", () => {
+  test("Different code but same position", () => {
     const pawn1 = new PawnStub(2, new Position(2, 3))
     const pawn2 = new PawnStub(0, new Position(2, 3))
     expect(pawn1.equals(pawn2)).toBeFalsy()
@@ -87,7 +87,7 @@ describe("equals", () => {
 })
 
 describe("move", () => {
-  it("Preservation of immutability", () => {
+  test("Preservation of immutability", () => {
     const pieceCode: number = 2
     const position: Position = new Position(0, 2)
     const pawn = new PawnStub(pieceCode, position)

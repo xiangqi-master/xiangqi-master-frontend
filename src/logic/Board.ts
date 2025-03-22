@@ -10,11 +10,7 @@ class Board {
   private readonly pieces: Set<Piece>
 
   public constructor(pieces: Piece[] | Set<Piece> = []) {
-    if (Set.isSet(pieces)) {
-      this.pieces = pieces
-    } else {
-      this.pieces = Set<Piece>(pieces)
-    }
+    this.pieces = Set.isSet(pieces) ? pieces : Set<Piece>(pieces)
   }
 
   /**

@@ -17,14 +17,14 @@ class ConvertPieceCodeTest extends PieceFactory {
   }
 }
 
-describe("Test: convertPieceCode", () => {
-  it("isRed === true", () => {
+describe("convertPieceCode", () => {
+  test("isRed === true", () => {
     expect(new ConvertPieceCodeTest(0).test(true)).toBe(0)
     expect(new ConvertPieceCodeTest(10).test(true)).toBe(10)
     expect(new ConvertPieceCodeTest(-1).test(true)).toBe(-1)
   })
 
-  it("isRed === false", () => {
+  test("isRed === false", () => {
     expect(new ConvertPieceCodeTest(0).test(false)).toBe(10)
     expect(new ConvertPieceCodeTest(10).test(false)).toBe(20)
     expect(new ConvertPieceCodeTest(-1).test(false)).toBe(9)

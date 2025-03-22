@@ -3,6 +3,9 @@ import PieceFactory from "../PieceFactory"
 import Rook from "../../pieces/Rook"
 import PieceType from "../PieceType"
 
+/**
+ * A class to represent a factory to create a rook / chariot.
+ */
 class RookFactory extends PieceFactory {
   constructor() {
     super(PieceType.ROOK)
