@@ -22,7 +22,11 @@ class Rook extends Piece {
     const validMoves: Position[] = []
 
     for (const [dx, dy] of moveDirections) {
-      for (let step = 1; step <= 9; step++) {
+      for (
+        let step = 1;
+        step <= Math.max(Position.ROWS, Position.COLS) - 1;
+        step++
+      ) {
         // Move multiple steps
         const newX = this.getPosition().getX() + dx * step
         const newY = this.getPosition().getY() + dy * step

@@ -23,10 +23,14 @@
     "build": "react-scripts build",
     "react-test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx .",
     "prepare": "husky",
-    "prepare-husky-scripts": "echo \"added_files=\\$(git diff --name-only --cached --diff-filter=d)\nnpm run lint:fix && git add \\${added_files}\" > .husky/pre-commit && echo \"npm run test\" > .husky/pre-push",
     "test": "jest"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,html,css,json}": [
+      "eslint --fix --ext .js,.jsx,.ts,.tsx ./src/",
+      "prettier --write"
+    ]
   },
   "browserslist": {
     "production": [
@@ -50,6 +54,7 @@
     "eslint-plugin-react-hooks": "^5.0.0",
     "husky": "^9.1.7",
     "jest": "^29.7.0",
+    "lint-staged": "^15.5.0",
     "nodemon": "^3.1.7",
     "prettier": "^3.4.2",
     "ts-jest": "^29.2.5",
