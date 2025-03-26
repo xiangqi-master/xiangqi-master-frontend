@@ -1,7 +1,6 @@
 import Piece from "../Piece"
 import Board from "../Board"
 import Position from "../Position"
-import Optional from "../utils/Optional"
 
 /**
  * A class to represent an Elephant in Chinese Chess.
