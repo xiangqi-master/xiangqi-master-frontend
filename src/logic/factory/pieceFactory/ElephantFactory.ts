@@ -8,7 +8,7 @@ import PieceType from "../PieceType"
  */
 class ElephantFactory extends PieceFactory {
   constructor() {
-    super(PieceType.ROOK)
+    super(PieceType.ELEPHANT)
   }
 
   public override createPiece(isRed: boolean, position: Position): Elephant {

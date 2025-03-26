@@ -4,7 +4,7 @@ import Elephant from "../../../../../src/logic/pieces/Elephant"
 
 describe("ElephantFactory", () => {
   test("isRed === true", () => {
-    const position = new Position(6, 8)
+    const position = new Position(2, 0)
     const elephant = new ElephantFactory().createPiece(true, position)
     expect(elephant).toBeInstanceOf(Elephant)
     expect(elephant.getPosition().equals(position)).toBeTruthy()
@@ -13,7 +13,7 @@ describe("ElephantFactory", () => {
   })
 
   test("isRed === false", () => {
-    const position = new Position(1, 2)
+    const position = new Position(2, 9)
     const elephant = new ElephantFactory().createPiece(false, position)
     expect(elephant).toBeInstanceOf(Elephant)
     expect(elephant.getPosition().equals(position)).toBeTruthy()
