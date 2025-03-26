@@ -8,7 +8,7 @@ describe("ElephantFactory", () => {
     const elephant = new ElephantFactory().createPiece(true, position)
     expect(elephant).toBeInstanceOf(Elephant)
     expect(elephant.getPosition().equals(position)).toBeTruthy()
-    expect(elephant.getCode()).toBe(4)
+    expect(elephant.getCode()).toBe(1)
     expect(elephant.isRed()).toBeTruthy()
   })
 
@@ -17,7 +17,7 @@ describe("ElephantFactory", () => {
     const elephant = new ElephantFactory().createPiece(false, position)
     expect(elephant).toBeInstanceOf(Elephant)
     expect(elephant.getPosition().equals(position)).toBeTruthy()
-    expect(elephant.getCode()).toBe(14)
+    expect(elephant.getCode()).toBe(11)
     expect(elephant.isRed()).toBeFalsy()
   })
 })
