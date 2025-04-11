@@ -2,6 +2,9 @@ name: linter
 
 on: [push, pull_request]
 
+env:
+  eslint_rules: "prettier/prettier: [error]"
+
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -13,7 +16,6 @@ jobs:
       - name: npm install
         run: npm install -D
       - name: run ESLint
-        run: >
-          npx eslint --ext .js,.jsx,.ts,.tsx . --rule 'prettier/prettier: [error]'
+        run: npx eslint --ext .js,.jsx,.ts,.tsx . --rule $eslint_rules
       - name: run test cases
         run: npm run test
