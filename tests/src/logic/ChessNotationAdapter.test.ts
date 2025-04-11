@@ -202,4 +202,46 @@ describe("ChessNotationAdapter - toNotation", () => {
     )
     expect(notation).toBe("后炮退一")
   })
+
+  //mutiple chess
+
+  test("Three red Pawns in same column, the third one moves back => 三兵退一", () => {
+    const first = createPawnStub(true, new Position(8, 7))
+    const second = createPawnStub(true, new Position(8, 5))
+    const third = createPawnStub(true, new Position(8, 3))
+    const board = new Board([first, second, third])
+    const notation = ChessNotationAdapter.toNotation(
+      board,
+      new Position(8, 3),
+      new Position(8, 2)
+    )
+    expect(notation).toBe("三兵退一")
+  })
+
+  test("Three red Pawns in same column, the second one moves horizontally => 二兵平二", () => {
+    const first = createPawnStub(true, new Position(8, 7))
+    const second = createPawnStub(true, new Position(8, 5))
+    const third = createPawnStub(true, new Position(8, 3))
+    const board = new Board([first, second, third])
+    const notation = ChessNotationAdapter.toNotation(
+      board,
+      new Position(8, 5),
+      new Position(7, 5)
+    )
+    expect(notation).toBe("二兵平二")
+  })
+
+  test("Four red Pawns in same column, the second one moves horizontally => 四兵退一", () => {
+    const first = createPawnStub(true, new Position(8, 7))
+    const second = createPawnStub(true, new Position(8, 5))
+    const third = createPawnStub(true, new Position(8, 3))
+    const fourth = createPawnStub(true, new Position(8, 2))
+    const board = new Board([first, second, third, fourth])
+    const notation = ChessNotationAdapter.toNotation(
+      board,
+      new Position(8, 2),
+      new Position(8, 1)
+    )
+    expect(notation).toBe("四兵退一")
+  })
 })
