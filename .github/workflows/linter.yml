@@ -13,7 +13,7 @@ jobs:
       - name: npm install
         run: npm install -D
       - name: run ESLint
-        run: |
+        run: >
           npx eslint --ext .js,.jsx,.ts,.tsx . --rule 'prettier/prettier: [error]'
       - name: run test cases
         run: npm run test
