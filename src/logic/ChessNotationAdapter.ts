@@ -1,9 +1,10 @@
 import Board from "./Board"
 import Position from "./Position"
+import Piece from "./Piece"
 
-const xToChinese = ["一", "二", "三", "四", "五", "六", "七", "八", "九"]
 const RED_START_X = 8
 const BLACK_START_X = 0
+const xToChinese = ["一", "二", "三", "四", "五", "六", "七", "八", "九"]
 
 const PieceNameMap: Record<number, [string, string]> = {
   0: ["仕", "士"], // Advisor
@@ -15,40 +16,64 @@ const PieceNameMap: Record<number, [string, string]> = {
   6: ["兵", "卒"] // Pawn
 }
 
-/** Returns the Chinese character name for a given piece code */
 export function getPieceName(code: number): string {
-  const isRed = code < 10
   const baseCode = code % 10
-  const names = PieceNameMap[baseCode]
-  return isRed ? names[0] : names[1]
+  const isRed = code < 10
+  return isRed ? PieceNameMap[baseCode][0] : PieceNameMap[baseCode][1]
+}
+
+function getPawnPrefix(board: Board, piece: Piece): string {
+  const isRed = piece.getCode() < 10
+  const x = piece.getPosition().getX()
+
+  const allPieces = Array.from(board.getPieces())
+
+  const sameColumnPawns = allPieces.filter(
+    (p) => p.getCode() === piece.getCode() && p.getPosition().getX() === x
+  )
+
+  if (sameColumnPawns.length >= 3) {
+    const sorted = sameColumnPawns.sort((a, b) => {
+      const ya = a.getPosition().getY()
+      const yb = b.getPosition().getY()
+      return isRed ? yb - ya : ya - yb
+    })
+    const index = sorted.findIndex((p) => p === piece)
+    return xToChinese[index]
+  }
+
+  return ""
 }
 
 export default class ChessNotationAdapter {
   public static toNotation(board: Board, from: Position, to: Position): string {
     const allPieces = Array.from(board.getPieces())
-    const movingPiece = allPieces.find((p) => p.getPosition().equals(from))
-    if (!movingPiece) throw new Error("No piece at source position")
+    const piece = allPieces.find((p) => p.getPosition().equals(from))
+    if (!piece) throw new Error("No piece at source position")
 
-    const code = movingPiece.getCode()
-    const isRed = code < 10
-    const pieceName = getPieceName(code)
+    const isRed = piece.getCode() < 10
+    const baseCode = piece.getCode() % 10
+    const pieceName = getPieceName(piece.getCode())
 
-    // Handle front/back (前/后) disambiguation
-    const sameColumn = allPieces.filter(
+    const sameColumnSameType = allPieces.filter(
       (p) =>
-        p !== movingPiece &&
-        p.getCode() === code &&
+        p !== piece &&
+        p.getCode() === piece.getCode() &&
         p.getPosition().getX() === from.getX()
     )
 
     let prefix = ""
-    if (sameColumn.length > 0) {
-      const ordered = sameColumn.concat([movingPiece]).sort((a, b) => {
+    if (baseCode === 6) {
+      prefix = getPawnPrefix(board, piece)
+    }
+
+    if (!prefix && sameColumnSameType.length > 0) {
+      const sorted = sameColumnSameType.concat([piece]).sort((a, b) => {
         return isRed
           ? b.getPosition().getY() - a.getPosition().getY()
           : a.getPosition().getY() - b.getPosition().getY()
       })
-      const index = ordered.findIndex((p) => p === movingPiece)
+      const index = sorted.findIndex((p) => p === piece)
       prefix = index === 0 ? "前" : "后"
     }
 
@@ -74,20 +99,22 @@ export default class ChessNotationAdapter {
         : xToChinese[BLACK_START_X + toX]
     } else if ((isRed && toY > fromY) || (!isRed && toY < fromY)) {
       action = "进"
-      dest =
-        fromX === toX
-          ? xToChinese[Math.abs(toY - fromY) - 1]
-          : isRed
-            ? xToChinese[RED_START_X - toX]
-            : xToChinese[BLACK_START_X + toX]
+      if (fromX === toX) {
+        dest = xToChinese[Math.abs(toY - fromY) - 1]
+      } else {
+        dest = isRed
+          ? xToChinese[RED_START_X - toX]
+          : xToChinese[BLACK_START_X + toX]
+      }
     } else {
       action = "退"
-      dest =
-        fromX === toX
-          ? xToChinese[Math.abs(fromY - toY) - 1]
-          : isRed
-            ? xToChinese[RED_START_X - toX]
-            : xToChinese[BLACK_START_X + toX]
+      if (fromX === toX) {
+        dest = xToChinese[Math.abs(fromY - toY) - 1]
+      } else {
+        dest = isRed
+          ? xToChinese[RED_START_X - toX]
+          : xToChinese[BLACK_START_X + toX]
+      }
     }
 
     return `${prefix}${pieceName}${file}${action}${dest}`
