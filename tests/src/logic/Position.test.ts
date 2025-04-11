@@ -1,79 +1,79 @@
 import Position from "../../../src/logic/Position"
 
 describe("Test: isWithinBoundary", () => {
-  it("valid boundary positions", () => {
-    expect(new Position(0, 0).isWithinBoundary()).toBeTruthy()
-    expect(new Position(0, 9).isWithinBoundary()).toBeTruthy()
-    expect(new Position(8, 0).isWithinBoundary()).toBeTruthy()
-    expect(new Position(8, 9).isWithinBoundary()).toBeTruthy()
+  test("valid boundary positions", () => {
+    expect(
+      new Position(Position.START, Position.START).isWithinBoundary()
+    ).toBeTruthy()
+    expect(
+      new Position(Position.START, Position.ROWS - 1).isWithinBoundary()
+    ).toBeTruthy()
+    expect(
+      new Position(Position.COLS - 1, Position.START).isWithinBoundary()
+    ).toBeTruthy()
+    expect(
+      new Position(Position.COLS - 1, Position.ROWS - 1).isWithinBoundary()
+    ).toBeTruthy()
   })
 
-  it("invalid boundary positions", () => {
-    expect(new Position(0, -1).isWithinBoundary()).toBeFalsy()
-    expect(new Position(0, -1).isWithinBoundary()).toBeFalsy()
-    expect(new Position(0, -1).isWithinBoundary()).toBeFalsy()
-    expect(new Position(0, 10).isWithinBoundary()).toBeFalsy()
-    expect(new Position(9, 0).isWithinBoundary()).toBeFalsy()
-  })
-})
-
-describe("Test: isCrossRiver", () => {
-  it("isRed === true && isCrossRiver === true", () => {
-    expect(new Position(0, 5).isCrossRiver(true)).toBeTruthy()
-    expect(new Position(0, 10).isCrossRiver(true)).toBeTruthy()
-    expect(new Position(-1, 5).isCrossRiver(true)).toBeTruthy()
-  })
-
-  it("isRed === true && isCrossRiver === false", () => {
-    expect(new Position(0, 4).isCrossRiver(true)).toBeFalsy()
-    expect(new Position(0, -1).isCrossRiver(true)).toBeFalsy()
-  })
-
-  it("isRed === false && isCrossRiver === true", () => {
-    expect(new Position(100, 4).isCrossRiver(false)).toBeTruthy()
-    expect(new Position(0, -1).isCrossRiver(false)).toBeTruthy()
-  })
-
-  it("isRed === false && isCrossRiver === false", () => {
-    expect(new Position(0, 5).isCrossRiver(false)).toBeFalsy()
-    expect(new Position(0, 100).isCrossRiver(false)).toBeFalsy()
+  test("invalid boundary positions", () => {
+    expect(new Position(Position.START, -1).isWithinBoundary()).toBeFalsy()
+    expect(new Position(-1, Position.START).isWithinBoundary()).toBeFalsy()
+    expect(new Position(-1, -1).isWithinBoundary()).toBeFalsy()
+    expect(
+      new Position(Position.COLS, Position.START).isWithinBoundary()
+    ).toBeFalsy()
+    expect(
+      new Position(Position.START, Position.ROWS).isWithinBoundary()
+    ).toBeFalsy()
+    expect(
+      new Position(Position.COLS, Position.ROWS).isWithinBoundary()
+    ).toBeFalsy()
+    expect(
+      new Position(Position.START, Number.POSITIVE_INFINITY).isWithinBoundary()
+    ).toBeFalsy()
+    expect(
+      new Position(Number.POSITIVE_INFINITY, Position.START).isWithinBoundary()
+    ).toBeFalsy()
   })
 })
 
-describe("Test: isCrossRiver", () => {
-  it("isRed === true && isCrossRiver === true", () => {
-    expect(new Position(0, 5).isCrossRiver(true)).toBeTruthy()
-    expect(new Position(0, 100).isCrossRiver(true)).toBeTruthy()
-    expect(new Position(100, 5).isCrossRiver(true)).toBeTruthy()
+describe("Test: hasCrossedRiver", () => {
+  test("isRed === true && hasCrossedRiver === true", () => {
+    expect(new Position(Position.START, 5).hasCrossedRiver(true)).toBeTruthy()
+    expect(new Position(Position.START, 100).hasCrossedRiver(true)).toBeTruthy()
+    expect(new Position(100, 5).hasCrossedRiver(true)).toBeTruthy()
   })
 
-  it("isRed === true && isCrossRiver === false", () => {
-    expect(new Position(0, 4).isCrossRiver(true)).toBeFalsy()
-    expect(new Position(-100, 4).isCrossRiver(true)).toBeFalsy()
-    expect(new Position(0, 0).isCrossRiver(true)).toBeFalsy()
+  test("isRed === true && hasCrossedRiver === false", () => {
+    expect(new Position(Position.START, 4).hasCrossedRiver(true)).toBeFalsy()
+    expect(new Position(-100, 4).hasCrossedRiver(true)).toBeFalsy()
+    expect(
+      new Position(Position.START, Position.START).hasCrossedRiver(true)
+    ).toBeFalsy()
   })
 
-  it("isRed === false && isCrossRiver === true", () => {
-    expect(new Position(0, 4).isCrossRiver(false)).toBeTruthy()
-    expect(new Position(100, 4).isCrossRiver(false)).toBeTruthy()
-    expect(new Position(0, -1).isCrossRiver(false)).toBeTruthy()
+  test("isRed === false && hasCrossedRiver === true", () => {
+    expect(new Position(Position.START, 4).hasCrossedRiver(false)).toBeTruthy()
+    expect(new Position(100, 4).hasCrossedRiver(false)).toBeTruthy()
+    expect(new Position(Position.START, -1).hasCrossedRiver(false)).toBeTruthy()
   })
 
-  it("isRed === false && isCrossRiver === false", () => {
-    expect(new Position(0, 5).isCrossRiver(false)).toBeFalsy()
-    expect(new Position(0, 100).isCrossRiver(false)).toBeFalsy()
-    expect(new Position(100, 5).isCrossRiver(false)).toBeFalsy()
+  test("isRed === false && hasCrossedRiver === false", () => {
+    expect(new Position(Position.START, 5).hasCrossedRiver(false)).toBeFalsy()
+    expect(new Position(Position.START, 100).hasCrossedRiver(false)).toBeFalsy()
+    expect(new Position(100, 5).hasCrossedRiver(false)).toBeFalsy()
   })
 })
 
 describe("Test: equals", () => {
-  it("equals === true", () => {
+  test("equals === true", () => {
     let position1 = new Position(1, 3)
     let position2 = new Position(1, 3)
     expect(position1.equals(position2)).toBeTruthy()
   })
 
-  it("equals === false due to unequal positions", () => {
+  test("equals === false due to unequal positions", () => {
     let position1 = new Position(1, 3)
     let position2 = new Position(2, 3)
     expect(position1.equals(position2)).toBeFalsy()
@@ -83,14 +83,14 @@ describe("Test: equals", () => {
     expect(position1.equals(position2)).toBeFalsy()
   })
 
-  it("equals === false due to null position", () => {
+  test("equals === false due to null position", () => {
     let position1 = new Position(1, 3)
     let position2 = null
     // @ts-ignore
     expect(position1.equals(position2)).toBeFalsy()
   })
 
-  it("equals === false due to undefined position", () => {
+  test("equals === false due to undefined position", () => {
     let position1 = new Position(1, 3)
     let position2 = undefined
     // @ts-ignore

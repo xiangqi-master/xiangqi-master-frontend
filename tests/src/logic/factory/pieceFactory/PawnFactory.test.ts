@@ -2,8 +2,8 @@ import PawnFactory from "../../../../../src/logic/factory/pieceFactory/PawnFacto
 import Position from "../../../../../src/logic/Position"
 import Pawn from "../../../../../src/logic/pieces/Pawn"
 
-describe("Test: PawnFactory", () => {
-  it("isRed === true", () => {
+describe("PawnFactory", () => {
+  test("isRed === true", () => {
     const position = new Position(6, 8)
     const pawn = new PawnFactory().createPiece(true, position)
     expect(pawn).toBeInstanceOf(Pawn)
@@ -12,7 +12,7 @@ describe("Test: PawnFactory", () => {
     expect(pawn.isRed()).toBeTruthy()
   })
 
-  it("isRed === false", () => {
+  test("isRed === false", () => {
     const position = new Position(1, 2)
     const pawn = new PawnFactory().createPiece(false, position)
     expect(pawn).toBeInstanceOf(Pawn)
