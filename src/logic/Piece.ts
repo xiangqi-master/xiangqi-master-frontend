@@ -1,16 +1,19 @@
 import Position from "./Position"
 import Board from "./Board"
 import { ValueObject } from "immutable"
+import Color from "./Color"
 
 /**
  * An abstract class to represent a piece on a checkerboard.
  */
 abstract class Piece implements ValueObject {
   private readonly code: number
+  private readonly color: string
   private readonly position: Position
 
-  protected constructor(code: number, position: Position) {
+  protected constructor(code: number, color: string, position: Position) {
     this.code = code
+    this.color = color
     this.position = position
   }
 
@@ -43,15 +46,15 @@ abstract class Piece implements ValueObject {
     return new (this.constructor as any)(this.code, targetPosition)
   }
 
+  public getCode(): number {
+    return this.code
+  }
+
   /**
    * Checks if this piece is red or black.
    */
   public isRed(): boolean {
-    return this.code < 10
-  }
-
-  public getCode(): number {
-    return this.code
+    return this.color === Color.RED
   }
 
   public getPosition(): Position {
@@ -68,7 +71,11 @@ abstract class Piece implements ValueObject {
       return false
     }
 
-    return this.code === piece.code && this.position.equals(piece.position)
+    return (
+      this.code === piece.code &&
+      this.isRed === piece.isRed &&
+      this.position.equals(piece.position)
+    )
   }
 
   /**

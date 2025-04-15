@@ -7,12 +7,12 @@ import Optional from "../utils/Optional"
  * A class to represent an Advisor on a checkerboard.
  */
 class Advisor extends Piece {
-  public constructor(code: number, position: Position) {
-    super(code, position)
+  public constructor(code: number, color: string, position: Position) {
+    super(code, color, position)
   }
 
   public override getAllValidMoves(board: Board): Position[] {
-    const isRed: boolean = super.isRed()
+    // const isRed: boolean = super.isRed()
     const moveDirections: number[][] = [
       [1, 1],
       [-1, 1],
@@ -34,7 +34,7 @@ class Advisor extends Piece {
           // check if there is a piece
           Optional.ofNullable(board.getPieceByPosition(position))
             .or(() => Optional.of(this))
-            .filter((piece) => piece === this || piece.isRed() !== isRed)
+            .filter((piece) => piece === this || piece.isRed() !== this.isRed())
             .isPresent()
         )
         // Prevent Advisor from leaving the General's Palace

@@ -6,8 +6,8 @@ import Position from "../Position"
  * A class to represent a rook on a checkerboard.
  */
 class Rook extends Piece {
-  public constructor(code: number, position: Position) {
-    super(code, position)
+  public constructor(code: number, color: string, position: Position) {
+    super(code, color, position)
   }
 
   public override getAllValidMoves(board: Board): Position[] {

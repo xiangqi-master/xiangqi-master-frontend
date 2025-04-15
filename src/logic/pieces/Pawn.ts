@@ -7,8 +7,8 @@ import Optional from "../utils/Optional"
  * A class to represent a pawn on a checkerboard.
  */
 class Pawn extends Piece {
-  public constructor(code: number, position: Position) {
-    super(code, position)
+  public constructor(code: number, color: string, position: Position) {
+    super(code, color, position)
   }
 
   public override getAllValidMoves(board: Board): Position[] {
