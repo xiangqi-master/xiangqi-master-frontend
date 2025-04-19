@@ -12,8 +12,8 @@ class RookFactory extends PieceFactory {
   }
 
   public override createPiece(isRed: boolean, position: Position): Rook {
-    const pieceCode: number = super.convertPieceCode(isRed)
-    return new Rook(pieceCode, position)
+    const color: string = super.getColor(isRed)
+    return new Rook(6, color, position)
   }
 }
 

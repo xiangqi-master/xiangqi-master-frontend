@@ -12,8 +12,8 @@ class PawnFactory extends PieceFactory {
   }
 
   public override createPiece(isRed: boolean, position: Position): Pawn {
-    const pieceCode: number = super.convertPieceCode(isRed)
-    return new Pawn(pieceCode, position)
+    const color: string = super.getColor(isRed)
+    return new Pawn(1, color, position)
   }
 }
 

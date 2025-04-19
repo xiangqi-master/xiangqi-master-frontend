@@ -12,8 +12,8 @@ class AdvisorFactory extends PieceFactory {
   }
 
   public override createPiece(isRed: boolean, position: Position): Advisor {
-    const pieceCode: number = super.convertPieceCode(isRed)
-    return new Advisor(pieceCode, position)
+    const color: string = super.getColor(isRed)
+    return new Advisor(2, color, position)
   }
 }
 
