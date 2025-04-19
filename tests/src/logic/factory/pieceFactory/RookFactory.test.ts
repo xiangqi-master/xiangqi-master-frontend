@@ -8,7 +8,7 @@ describe("RookFactory", () => {
     const rook = new RookFactory().createPiece(true, position)
     expect(rook).toBeInstanceOf(Rook)
     expect(rook.getPosition().equals(position)).toBeTruthy()
-    expect(rook.getCode()).toBe(4)
+    expect(rook.getCode()).toBe(6)
     expect(rook.isRed()).toBeTruthy()
   })
 
@@ -17,7 +17,7 @@ describe("RookFactory", () => {
     const rook = new RookFactory().createPiece(false, position)
     expect(rook).toBeInstanceOf(Rook)
     expect(rook.getPosition().equals(position)).toBeTruthy()
-    expect(rook.getCode()).toBe(14)
+    expect(rook.getCode()).toBe(6)
     expect(rook.isRed()).toBeFalsy()
   })
 })

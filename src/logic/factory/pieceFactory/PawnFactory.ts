@@ -1,7 +1,7 @@
 import Position from "../../Position"
 import PieceFactory from "../PieceFactory"
-import Pawn from "../../pieces/Pawn"
 import PieceType from "../PieceType"
+import Pawn from "../../pieces/Pawn"
 
 /**
  * A class to represent a factory to create a pawn.

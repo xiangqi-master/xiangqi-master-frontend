@@ -8,7 +8,7 @@ describe("AdvisorFactory", () => {
     const advisor = new AdvisorFactory().createPiece(true, position)
     expect(advisor).toBeInstanceOf(Advisor)
     expect(advisor.getPosition().equals(position)).toBeTruthy()
-    expect(advisor.getCode()).toBe(0)
+    expect(advisor.getCode()).toBe(2)
     expect(advisor.isRed()).toBeTruthy()
   })
 
@@ -17,7 +17,7 @@ describe("AdvisorFactory", () => {
     const advisor = new AdvisorFactory().createPiece(false, position)
     expect(advisor).toBeInstanceOf(Advisor)
     expect(advisor.getPosition().equals(position)).toBeTruthy()
-    expect(advisor.getCode()).toBe(10)
+    expect(advisor.getCode()).toBe(2)
     expect(advisor.isRed()).toBeFalsy()
   })
 })

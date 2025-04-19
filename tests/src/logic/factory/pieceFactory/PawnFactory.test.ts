@@ -8,7 +8,7 @@ describe("PawnFactory", () => {
     const pawn = new PawnFactory().createPiece(true, position)
     expect(pawn).toBeInstanceOf(Pawn)
     expect(pawn.getPosition().equals(position)).toBeTruthy()
-    expect(pawn.getCode()).toBe(6)
+    expect(pawn.getCode()).toBe(1)
     expect(pawn.isRed()).toBeTruthy()
   })
 
@@ -17,7 +17,7 @@ describe("PawnFactory", () => {
     const pawn = new PawnFactory().createPiece(false, position)
     expect(pawn).toBeInstanceOf(Pawn)
     expect(pawn.getPosition().equals(position)).toBeTruthy()
-    expect(pawn.getCode()).toBe(16)
+    expect(pawn.getCode()).toBe(1)
     expect(pawn.isRed()).toBeFalsy()
   })
 })
