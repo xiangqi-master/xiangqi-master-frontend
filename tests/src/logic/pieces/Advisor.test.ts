@@ -1,11 +1,12 @@
 import Piece from "../../../../src/logic/Piece"
 import Advisor from "../../../../src/logic/pieces/Advisor"
+import Color from "../../../../src/logic/Color"
 import Board from "../../../../src/logic/Board"
 import Position from "../../../../src/logic/Position"
 
 class PawnStub extends Piece {
-  public constructor(code: number, position: Position) {
-    super(code, position)
+  public constructor(code: number, color: string, position: Position) {
+    super(code, color, position)
   }
 
   getAllValidMoves(_board: Board): Position[] {
@@ -18,8 +19,8 @@ class PawnStub extends Piece {
 }
 
 class HorseStub extends Piece {
-  public constructor(code: number, position: Position) {
-    super(code, position)
+  public constructor(code: number, color: string, position: Position) {
+    super(code, color, position)
   }
 
   getAllValidMoves(_board: Board): Position[] {
@@ -32,18 +33,18 @@ class HorseStub extends Piece {
 }
 
 function createAdvisor(isRed: boolean, position: Position): Advisor {
-  const code = 0
-  return new Advisor(isRed ? code : code + 10, position)
+  const code = 2
+  return new Advisor(code, isRed ? Color.RED : Color.BLACK, position)
 }
 
 function createPawnStub(isRed: boolean, position: Position): PawnStub {
-  const code = 6
-  return new PawnStub(isRed ? code : code + 10, position)
+  const code = 1
+  return new PawnStub(code, isRed ? Color.RED : Color.BLACK, position)
 }
 
 function createHorseStub(isRed: boolean, position: Position): PawnStub {
-  const code = 3
-  return new HorseStub(isRed ? code : code + 10, position)
+  const code = 4
+  return new HorseStub(code, isRed ? Color.RED : Color.BLACK, position)
 }
 
 describe("Advisor in an empty board", () => {
