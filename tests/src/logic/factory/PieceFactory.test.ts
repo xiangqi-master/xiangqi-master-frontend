@@ -15,7 +15,7 @@ class PieceFactoryTest extends PieceFactory {
     return new Pawn(PieceCode.PAWN, color, position)
   }
 
-  public getColor(isRed: boolean): string {
+  public getColor(isRed: boolean): Color {
     return super.getColor(isRed)
   }
 }

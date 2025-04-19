@@ -2,17 +2,17 @@ import Piece from "../Piece"
 import Board from "../Board"
 import Position from "../Position"
 import Optional from "../utils/Optional"
+import Color from "../Color"
 
 /**
  * A class to represent a pawn on a checkerboard.
  */
 class Pawn extends Piece {
-  public constructor(code: number, color: string, position: Position) {
+  public constructor(code: number, color: Color, position: Position) {
     super(code, color, position)
   }
 
   public override getAllValidMoves(board: Board): Position[] {
-    // const isRed: boolean = this.isRed()
     const forwardDirection: 1 | -1 = this.isRed() ? 1 : -1
     const moveDirections: number[][] = [
       [-1, 0],

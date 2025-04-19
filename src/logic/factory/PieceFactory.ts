@@ -20,7 +20,10 @@ abstract class PieceFactory {
    */
   public abstract createPiece(_isRed: boolean, _position: Position): Piece
 
-  protected getColor(isRed: boolean): string {
+  /**
+   * Gets the code of this piece.
+   */
+  protected getColor(isRed: boolean): Color {
     return isRed ? Color.RED : Color.BLACK
   }
 }

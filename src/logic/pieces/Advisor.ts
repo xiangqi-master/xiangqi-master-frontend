@@ -2,17 +2,17 @@ import Piece from "../Piece"
 import Board from "../Board"
 import Position from "../Position"
 import Optional from "../utils/Optional"
+import Color from "../Color"
 
 /**
  * A class to represent an Advisor on a checkerboard.
  */
 class Advisor extends Piece {
-  public constructor(code: number, color: string, position: Position) {
+  public constructor(code: number, color: Color, position: Position) {
     super(code, color, position)
   }
 
   public override getAllValidMoves(board: Board): Position[] {
-    // const isRed: boolean = super.isRed()
     const moveDirections: number[][] = [
       [1, 1],
       [-1, 1],

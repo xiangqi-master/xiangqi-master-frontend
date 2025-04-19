@@ -8,10 +8,10 @@ import Color from "./Color"
  */
 abstract class Piece implements ValueObject {
   private readonly code: number
-  private readonly color: string
+  private readonly color: Color
   private readonly position: Position
 
-  protected constructor(code: number, color: string, position: Position) {
+  protected constructor(code: number, color: Color, position: Position) {
     this.code = code
     this.color = color
     this.position = position
@@ -73,7 +73,7 @@ abstract class Piece implements ValueObject {
 
     return (
       this.code === piece.code &&
-      this.isRed === piece.isRed &&
+      this.color === piece.color &&
       this.position.equals(piece.position)
     )
   }

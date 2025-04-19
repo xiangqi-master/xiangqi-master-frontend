@@ -4,7 +4,7 @@ import Position from "../../../src/logic/Position"
 import Color from "../../../src/logic/Color"
 
 class PawnStub extends Piece {
-  public constructor(code: number, color: string, position: Position) {
+  public constructor(code: number, color: Color, position: Position) {
     super(code, color, position)
   }
 
@@ -18,7 +18,7 @@ class PawnStub extends Piece {
 }
 
 class HorseStub extends Piece {
-  public constructor(code: number, color: string, position: Position) {
+  public constructor(code: number, color: Color, position: Position) {
     super(code, color, position)
   }
 
