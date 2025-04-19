@@ -11,7 +11,7 @@ class Rook extends Piece {
   }
 
   public override getAllValidMoves(board: Board): Position[] {
-    const isRed: boolean = super.isRed()
+    // const isRed: boolean = super.isRed()
     const moveDirections: number[][] = [
       [-1, 0], // Move left
       [1, 0], // Move right
@@ -40,7 +40,7 @@ class Rook extends Piece {
 
         if (pieceAtNewPosition) {
           // Can capture if it's an opponent's piece
-          if (pieceAtNewPosition.isRed() !== isRed) {
+          if (pieceAtNewPosition.isRed() !== this.isRed()) {
             validMoves.push(newPosition)
           }
           break // Stop when encountering any piece
