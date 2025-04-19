@@ -6,7 +6,7 @@ import Color from "../Color"
  * An abstract class to represent a factory of pieces. This follows factory design pattern.
  */
 abstract class PieceFactory {
-  protected code: number = -1
+  protected code = -1
 
   protected constructor(code: number) {
     this.code = code

@@ -43,7 +43,11 @@ abstract class Piece implements ValueObject {
    * @param targetPosition the target position to move to
    */
   public move(targetPosition: Position): Piece {
-    return new (this.constructor as any)(this.code, this.color, targetPosition)
+    return new (this.constructor as new (
+      code: number,
+      color: Color,
+      position: Position
+    ) => Piece)(this.code, this.color, targetPosition)
   }
 
   public getCode(): number {

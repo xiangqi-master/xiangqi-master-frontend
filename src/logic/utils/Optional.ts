@@ -1,8 +1,10 @@
 type Consumer<T> = (_value: T) => void
 type Predicate<T> = (_value: T) => boolean
 type Producer<T> = () => T
-type Function<T, U> = (_value: T) => U
+type Func<T, U> = (_value: T) => U
 type ValueType<T> = T | null | undefined
+
+/* eslint-disable  @typescript-eslint/no-non-null-assertion */
 
 /**
  * A util class to better manage null or undefined values.
@@ -14,6 +16,7 @@ class Optional<T> {
     this.value = value
   }
 
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   private isNull(value: any): boolean {
     return value === undefined || value === null
   }
@@ -100,7 +103,7 @@ class Optional<T> {
    *
    * @param mapper the mapper function to be executed if the value is not null and not undefined
    */
-  public map<U>(mapper: Function<T, ValueType<U>>): Optional<U> {
+  public map<U>(mapper: Func<T, ValueType<U>>): Optional<U> {
     if (this.isNull(this.value)) {
       return new Optional<U>()
     }
@@ -114,7 +117,7 @@ class Optional<T> {
    *
    * @param mapper the mapper function to be executed if the value is not null and not undefined
    */
-  public flatMap<U>(mapper: Function<T, ValueType<Optional<U>>>): Optional<U> {
+  public flatMap<U>(mapper: Func<T, ValueType<Optional<U>>>): Optional<U> {
     if (this.isNull(this.value)) {
       return new Optional<U>()
     }
@@ -192,6 +195,7 @@ class Optional<T> {
     return this.value!
   }
 
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   public equals(other: Optional<any>) {
     if (this.isNull(this.value)) {
       return other.isNull(other.value)
