@@ -3,6 +3,7 @@ import Position from "../../../../src/logic/Position"
 import Piece from "../../../../src/logic/Piece"
 import Pawn from "../../../../src/logic/pieces/Pawn"
 import Color from "../../../../src/logic/Color"
+import PieceCode from "../../../../src/logic/factory/PieceCode"
 
 class PieceFactoryTest extends PieceFactory {
   constructor(code: number) {
@@ -11,7 +12,7 @@ class PieceFactoryTest extends PieceFactory {
 
   createPiece(isRed: boolean, position: Position): Piece {
     const color = super.getColor(isRed)
-    return new Pawn(1, color, position)
+    return new Pawn(PieceCode.PAWN, color, position)
   }
 
   public getColor(isRed: boolean): string {

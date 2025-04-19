@@ -1,6 +1,7 @@
 import AdvisorFactory from "../../../../../src/logic/factory/pieceFactory/AdvisorFactory"
 import Position from "../../../../../src/logic/Position"
 import Advisor from "../../../../../src/logic/pieces/Advisor"
+import PieceCode from "../../../../../src/logic/factory/PieceCode"
 
 describe("AdvisorFactory", () => {
   test("isRed === true", () => {
@@ -8,7 +9,7 @@ describe("AdvisorFactory", () => {
     const advisor = new AdvisorFactory().createPiece(true, position)
     expect(advisor).toBeInstanceOf(Advisor)
     expect(advisor.getPosition().equals(position)).toBeTruthy()
-    expect(advisor.getCode()).toBe(2)
+    expect(advisor.getCode()).toBe(PieceCode.ADVISOR)
     expect(advisor.isRed()).toBeTruthy()
   })
 
@@ -17,7 +18,7 @@ describe("AdvisorFactory", () => {
     const advisor = new AdvisorFactory().createPiece(false, position)
     expect(advisor).toBeInstanceOf(Advisor)
     expect(advisor.getPosition().equals(position)).toBeTruthy()
-    expect(advisor.getCode()).toBe(2)
+    expect(advisor.getCode()).toBe(PieceCode.ADVISOR)
     expect(advisor.isRed()).toBeFalsy()
   })
 })

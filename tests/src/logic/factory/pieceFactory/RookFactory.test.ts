@@ -1,6 +1,7 @@
 import RookFactory from "../../../../../src/logic/factory/pieceFactory/RookFactory"
 import Position from "../../../../../src/logic/Position"
 import Rook from "../../../../../src/logic/pieces/Rook"
+import PieceCode from "../../../../../src/logic/factory/PieceCode"
 
 describe("RookFactory", () => {
   test("isRed === true", () => {
@@ -8,7 +9,7 @@ describe("RookFactory", () => {
     const rook = new RookFactory().createPiece(true, position)
     expect(rook).toBeInstanceOf(Rook)
     expect(rook.getPosition().equals(position)).toBeTruthy()
-    expect(rook.getCode()).toBe(6)
+    expect(rook.getCode()).toBe(PieceCode.ROOK)
     expect(rook.isRed()).toBeTruthy()
   })
 
@@ -17,7 +18,7 @@ describe("RookFactory", () => {
     const rook = new RookFactory().createPiece(false, position)
     expect(rook).toBeInstanceOf(Rook)
     expect(rook.getPosition().equals(position)).toBeTruthy()
-    expect(rook.getCode()).toBe(6)
+    expect(rook.getCode()).toBe(PieceCode.ROOK)
     expect(rook.isRed()).toBeFalsy()
   })
 })

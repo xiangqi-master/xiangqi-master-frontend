@@ -1,6 +1,6 @@
 import Position from "../../Position"
 import PieceFactory from "../PieceFactory"
-import PieceType from "../PieceType"
+import PieceCode from "../PieceCode"
 import Pawn from "../../pieces/Pawn"
 
 /**
@@ -8,12 +8,12 @@ import Pawn from "../../pieces/Pawn"
  */
 class PawnFactory extends PieceFactory {
   constructor() {
-    super(PieceType.PAWN)
+    super(PieceCode.PAWN)
   }
 
   public override createPiece(isRed: boolean, position: Position): Pawn {
     const color: string = super.getColor(isRed)
-    return new Pawn(1, color, position)
+    return new Pawn(PieceCode.PAWN, color, position)
   }
 }
 
