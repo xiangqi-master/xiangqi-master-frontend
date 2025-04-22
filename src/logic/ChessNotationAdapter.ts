@@ -1,29 +1,30 @@
 import Board from "./Board"
 import Position from "./Position"
 import Piece from "./Piece"
+import PieceCode from "./factory/PieceCode"
 
 const RED_START_X = 8
 const BLACK_START_X = 0
 const xToChinese = ["一", "二", "三", "四", "五", "六", "七", "八", "九"]
 
-const PieceNameMap: Record<number, [string, string]> = {
-  0: ["仕", "士"], // Advisor
-  1: ["相", "象"], // Elephant
-  2: ["帥", "將"], // General
-  3: ["馬", "傌"], // Horse
-  4: ["車", "俥"], // Rook
-  5: ["炮", "砲"], // Cannon
-  6: ["兵", "卒"] // Pawn
+const PieceNameMap: Record<PieceCode, [string, string]> = {
+  [PieceCode.ADVISOR]: ["仕", "士"], // Advisor
+  [PieceCode.ELEPHANT]: ["相", "象"], // Elephant
+  [PieceCode.GENERAL]: ["帥", "將"], // General
+  [PieceCode.HORSE]: ["馬", "傌"], // Horse
+  [PieceCode.ROOK]: ["車", "俥"], // Rook
+  [PieceCode.CANNON]: ["炮", "砲"], // Cannon
+  [PieceCode.PAWN]: ["兵", "卒"] // Pawn
 }
 
-export function getPieceName(code: number): string {
-  const baseCode = code % 10
-  const isRed = code < 10
-  return isRed ? PieceNameMap[baseCode][0] : PieceNameMap[baseCode][1]
+export function getPieceName(piece: Piece): string {
+  const code = piece.getCode()
+  const isRed = piece.isRed()
+  return isRed ? PieceNameMap[code][0] : PieceNameMap[code][1]
 }
 
 function getPawnPrefix(board: Board, piece: Piece): string {
-  const isRed = piece.getCode() < 10
+  const isRed = piece.isRed()
   const x = piece.getPosition().getX()
 
   const allPieces = Array.from(board.getPieces())
@@ -51,9 +52,8 @@ export default class ChessNotationAdapter {
     const piece = allPieces.find((p) => p.getPosition().equals(from))
     if (!piece) throw new Error("No piece at source position")
 
-    const isRed = piece.getCode() < 10
-    const baseCode = piece.getCode() % 10
-    const pieceName = getPieceName(piece.getCode())
+    const isRed = piece.isRed()
+    const pieceName = getPieceName(piece)
 
     const sameColumnSameType = allPieces.filter(
       (p) =>
@@ -63,7 +63,7 @@ export default class ChessNotationAdapter {
     )
 
     let prefix = ""
-    if (baseCode === 6) {
+    if (piece.getCode() === PieceCode.PAWN) {
       prefix = getPawnPrefix(board, piece)
     }
 

@@ -4,10 +4,11 @@ import ChessNotationAdapter, {
 import Board from "../../../src/logic/Board"
 import Position from "../../../src/logic/Position"
 import Piece from "../../../src/logic/Piece"
+import PieceCode from "../../../src/logic/factory/PieceCode"
 
 class PieceStub extends Piece {
-  constructor(code: number, position: Position) {
-    super(code, position)
+  constructor(code: PieceCode, isRed: boolean, position: Position) {
+    super(code, isRed, position)
   }
 
   getAllValidMoves(): Position[] {
@@ -15,44 +16,36 @@ class PieceStub extends Piece {
   }
 
   toString(): string {
-    return getPieceName(this.getCode())
+    return getPieceName(this)
   }
 }
 
-function createStub(
-  code: number,
-  isRed: boolean,
-  position: Position
-): PieceStub {
-  return new PieceStub(isRed ? code : code + 10, position)
-}
-
 function createHorseStub(isRed: boolean, position: Position) {
-  return createStub(3, isRed, position)
+  return new PieceStub(PieceCode.HORSE, isRed, position)
 }
 
 function createElephantStub(isRed: boolean, position: Position) {
-  return createStub(1, isRed, position)
+  return new PieceStub(PieceCode.ELEPHANT, isRed, position)
 }
 
 function createAdvisorStub(isRed: boolean, position: Position) {
-  return createStub(0, isRed, position)
+  return new PieceStub(PieceCode.ADVISOR, isRed, position)
 }
 
 function createRookStub(isRed: boolean, position: Position) {
-  return createStub(4, isRed, position)
+  return new PieceStub(PieceCode.ROOK, isRed, position)
 }
 
 function createCannonStub(isRed: boolean, position: Position) {
-  return createStub(5, isRed, position)
+  return new PieceStub(PieceCode.CANNON, isRed, position)
 }
 
 function createPawnStub(isRed: boolean, position: Position) {
-  return createStub(6, isRed, position)
+  return new PieceStub(PieceCode.PAWN, isRed, position)
 }
 
 function createGeneralStub(isRed: boolean, position: Position) {
-  return createStub(2, isRed, position)
+  return new PieceStub(PieceCode.GENERAL, isRed, position)
 }
 
 describe("ChessNotationAdapter - toNotation", () => {
