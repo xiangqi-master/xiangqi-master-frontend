@@ -2,10 +2,11 @@ import Elephant from "../../../../src/logic/pieces/Elephant"
 import Board from "../../../../src/logic/Board"
 import Position from "../../../../src/logic/Position"
 import Piece from "../../../../src/logic/Piece"
+import PieceCode from "../../../../src/logic/factory/PieceCode"
 
 class PawnStub extends Piece {
-  public constructor(code: number, position: Position) {
-    super(code, position)
+  public constructor(isRed: boolean, position: Position) {
+    super(PieceCode.PAWN, isRed, position)
   }
 
   getAllValidMoves(_board: Board): Position[] {
@@ -18,8 +19,7 @@ class PawnStub extends Piece {
 }
 
 function createElephant(isRed: boolean, position: Position): Elephant {
-  const code = 2
-  return new Elephant(isRed ? code : code + 10, position)
+  return new Elephant(isRed, position)
 }
 
 describe("Elephant in an empty board", () => {
@@ -32,11 +32,11 @@ describe("Elephant in an empty board", () => {
   test("red elephant at (2, 0)", () => {
     const elephant = createElephant(true, new Position(2, 0))
     const board = emptyBoard.addPiece(elephant)
-    let expectedValidMoves: Position[] = [
+    const expectedValidMoves: Position[] = [
       new Position(0, 2),
       new Position(4, 2)
     ]
-    let actualMoves: Position[] = elephant.getAllValidMoves(board)
+    const actualMoves: Position[] = elephant.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -46,13 +46,13 @@ describe("Elephant in an empty board", () => {
   test("red elephant at (4, 2)", () => {
     const elephant = createElephant(true, new Position(4, 2))
     const board = emptyBoard.addPiece(elephant)
-    let expectedValidMoves: Position[] = [
+    const expectedValidMoves: Position[] = [
       new Position(2, 0),
       new Position(6, 0),
       new Position(2, 4),
       new Position(6, 4)
     ]
-    let actualMoves: Position[] = elephant.getAllValidMoves(board)
+    const actualMoves: Position[] = elephant.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -62,11 +62,11 @@ describe("Elephant in an empty board", () => {
   test("red elephant at (6, 4)", () => {
     const elephant = createElephant(true, new Position(6, 4))
     const board = emptyBoard.addPiece(elephant)
-    let expectedValidMoves: Position[] = [
+    const expectedValidMoves: Position[] = [
       new Position(4, 2),
       new Position(8, 2)
     ]
-    let actualMoves: Position[] = elephant.getAllValidMoves(board)
+    const actualMoves: Position[] = elephant.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -77,11 +77,11 @@ describe("Elephant in an empty board", () => {
   test("black elephant at (6, 9)", () => {
     const elephant = createElephant(false, new Position(6, 9))
     const board = emptyBoard.addPiece(elephant)
-    let expectedValidMoves: Position[] = [
+    const expectedValidMoves: Position[] = [
       new Position(4, 7),
       new Position(8, 7)
     ]
-    let actualMoves: Position[] = elephant.getAllValidMoves(board)
+    const actualMoves: Position[] = elephant.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -91,13 +91,13 @@ describe("Elephant in an empty board", () => {
   test("black elephant at (4, 7)", () => {
     const elephant = createElephant(false, new Position(4, 7))
     const board = emptyBoard.addPiece(elephant)
-    let expectedValidMoves: Position[] = [
+    const expectedValidMoves: Position[] = [
       new Position(6, 9),
       new Position(2, 9),
       new Position(6, 5),
       new Position(2, 5)
     ]
-    let actualMoves: Position[] = elephant.getAllValidMoves(board)
+    const actualMoves: Position[] = elephant.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -107,17 +107,16 @@ describe("Elephant in an empty board", () => {
   test("black elephant at (2, 5)", () => {
     const elephant = createElephant(false, new Position(2, 5))
     const board = emptyBoard.addPiece(elephant)
-    let expectedValidMoves: Position[] = [
+    const expectedValidMoves: Position[] = [
       new Position(0, 7),
       new Position(4, 7)
     ]
-    let actualMoves: Position[] = elephant.getAllValidMoves(board)
+    const actualMoves: Position[] = elephant.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
     ).toBeTruthy()
   })
-
 })
 
 describe("Elephant surrounded obstacles", () => {
@@ -126,102 +125,95 @@ describe("Elephant surrounded obstacles", () => {
     emptyBoard = new Board([])
   })
 
-  //one firend piece on the place elephant can reach
+  //one friend piece on the place elephant can reach
   test("elephant at (4,2) blocked by one friendly piece", () => {
-    const elephant = new Elephant(2, new Position(4, 2))
+    const elephant = new Elephant(true, new Position(4, 2))
     const board = emptyBoard
       .addPiece(elephant)
-      .addPiece(new PawnStub(0, new Position(2, 4)))
+      .addPiece(new PawnStub(true, new Position(2, 4)))
 
-    let expectedValidMoves: Position[] = [
+    const expectedValidMoves: Position[] = [
       new Position(2, 0),
       new Position(6, 0),
       new Position(6, 4)
     ]
 
-    let actualMoves = elephant.getAllValidMoves(board)
+    const actualMoves = elephant.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
     ).toBeTruthy()
   })
 
-
-  //two firend piece on the place elephant can reach
+  //two friend piece on the place elephant can reach
   test("elephant at (4,2) blocked by two friendly pieces", () => {
-    const elephant = new Elephant(2, new Position(4, 2))
+    const elephant = new Elephant(true, new Position(4, 2))
     const board = emptyBoard
       .addPiece(elephant)
-      .addPiece(new PawnStub(0, new Position(2, 4)))
-      .addPiece(new PawnStub(0, new Position(2, 0)))
+      .addPiece(new PawnStub(true, new Position(2, 4)))
+      .addPiece(new PawnStub(true, new Position(2, 0)))
 
-    let expectedValidMoves: Position[] = [
+    const expectedValidMoves: Position[] = [
       new Position(6, 0),
       new Position(6, 4)
     ]
 
-    let actualMoves = elephant.getAllValidMoves(board)
+    const actualMoves = elephant.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
     ).toBeTruthy()
   })
 
-  //three firend piece on the place elephant can reach
+  //three friend piece on the place elephant can reach
   test("elephant at (4,2) blocked by three friendly pieces", () => {
-    const elephant = new Elephant(2, new Position(4, 2))
+    const elephant = new Elephant(true, new Position(4, 2))
     const board = emptyBoard
       .addPiece(elephant)
-      .addPiece(new PawnStub(0, new Position(2, 4)))
-      .addPiece(new PawnStub(0, new Position(2, 0)))
-      .addPiece(new PawnStub(0, new Position(6, 0)))
+      .addPiece(new PawnStub(true, new Position(2, 4)))
+      .addPiece(new PawnStub(true, new Position(2, 0)))
+      .addPiece(new PawnStub(true, new Position(6, 0)))
 
-    let expectedValidMoves: Position[] = [
-      new Position(6, 4)
-    ]
+    const expectedValidMoves: Position[] = [new Position(6, 4)]
 
-    let actualMoves = elephant.getAllValidMoves(board)
+    const actualMoves = elephant.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
     ).toBeTruthy()
   })
 
-    //three firend piece on the place elephant can reach
+  //three friend piece on the place elephant can reach
   test("elephant at (4,2) blocked by three friendly pieces", () => {
-    const elephant = new Elephant(2, new Position(4, 2))
+    const elephant = new Elephant(true, new Position(4, 2))
     const board = emptyBoard
       .addPiece(elephant)
-      .addPiece(new PawnStub(0, new Position(2, 4)))
-      .addPiece(new PawnStub(0, new Position(2, 0)))
-      .addPiece(new PawnStub(0, new Position(6, 0)))
+      .addPiece(new PawnStub(true, new Position(2, 4)))
+      .addPiece(new PawnStub(true, new Position(2, 0)))
+      .addPiece(new PawnStub(true, new Position(6, 0)))
 
-    let expectedValidMoves: Position[] = [
-      new Position(6, 4)
-    ]
+    const expectedValidMoves: Position[] = [new Position(6, 4)]
 
-    let actualMoves = elephant.getAllValidMoves(board)
+    const actualMoves = elephant.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
     ).toBeTruthy()
   })
 
-  //four firend piece on the place elephant can reach
+  //four friend piece on the place elephant can reach
   test("elephant at (4,2) blocked by four friendly pieces", () => {
-    const elephant = new Elephant(2, new Position(4, 2))
+    const elephant = new Elephant(true, new Position(4, 2))
     const board = emptyBoard
       .addPiece(elephant)
-      .addPiece(new PawnStub(0, new Position(2, 4)))
-      .addPiece(new PawnStub(0, new Position(2, 0)))
-      .addPiece(new PawnStub(0, new Position(6, 0)))
-      .addPiece(new PawnStub(0, new Position(6, 4)))
+      .addPiece(new PawnStub(true, new Position(2, 4)))
+      .addPiece(new PawnStub(true, new Position(2, 0)))
+      .addPiece(new PawnStub(true, new Position(6, 0)))
+      .addPiece(new PawnStub(true, new Position(6, 4)))
 
-    let expectedValidMoves: Position[] = [
+    const expectedValidMoves: Position[] = []
 
-    ]
-
-    let actualMoves = elephant.getAllValidMoves(board)
+    const actualMoves = elephant.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -230,19 +222,19 @@ describe("Elephant surrounded obstacles", () => {
 
   //one opponent piece on the place elephant can reach
   test("elephant at (4,2) blocked by one opponent piece", () => {
-    const elephant = new Elephant(2, new Position(4, 2))
+    const elephant = new Elephant(true, new Position(4, 2))
     const board = emptyBoard
       .addPiece(elephant)
-      .addPiece(new PawnStub(10, new Position(2, 4)))
+      .addPiece(new PawnStub(false, new Position(2, 4)))
 
-    let expectedValidMoves: Position[] = [
+    const expectedValidMoves: Position[] = [
       new Position(2, 0),
       new Position(2, 4),
       new Position(6, 0),
       new Position(6, 4)
     ]
 
-    let actualMoves = elephant.getAllValidMoves(board)
+    const actualMoves = elephant.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -251,18 +243,18 @@ describe("Elephant surrounded obstacles", () => {
 
   //one friendly piece on the place elephant eye
   test("elephant at (4,2) blocked by one friendly piece on elephant eye", () => {
-    const elephant = new Elephant(2, new Position(4, 2))
+    const elephant = new Elephant(true, new Position(4, 2))
     const board = emptyBoard
       .addPiece(elephant)
-      .addPiece(new PawnStub(0, new Position(3, 3)))
+      .addPiece(new PawnStub(false, new Position(3, 3)))
 
-    let expectedValidMoves: Position[] = [
+    const expectedValidMoves: Position[] = [
       new Position(2, 0),
       new Position(6, 0),
       new Position(6, 4)
     ]
 
-    let actualMoves = elephant.getAllValidMoves(board)
+    const actualMoves = elephant.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -271,23 +263,21 @@ describe("Elephant surrounded obstacles", () => {
 
   //one opponent piece on the place elephant eye
   test("elephant at (4,2) blocked by one opponent piece on elephant eye", () => {
-    const elephant = new Elephant(2, new Position(4, 2))
+    const elephant = new Elephant(true, new Position(4, 2))
     const board = emptyBoard
       .addPiece(elephant)
-      .addPiece(new PawnStub(10, new Position(3, 3)))
+      .addPiece(new PawnStub(false, new Position(3, 3)))
 
-    let expectedValidMoves: Position[] = [
+    const expectedValidMoves: Position[] = [
       new Position(2, 0),
       new Position(6, 0),
       new Position(6, 4)
     ]
 
-    let actualMoves = elephant.getAllValidMoves(board)
+    const actualMoves = elephant.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
     ).toBeTruthy()
   })
 })
-
-

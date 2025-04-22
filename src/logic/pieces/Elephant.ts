@@ -1,13 +1,14 @@
 import Piece from "../Piece"
 import Board from "../Board"
 import Position from "../Position"
+import PieceCode from "../factory/PieceCode"
 
 /**
  * A class to represent an Elephant in Chinese Chess.
  */
 class Elephant extends Piece {
-  public constructor(code: number, position: Position) {
-    super(code, position)
+  public constructor(isRed: boolean, position: Position) {
+    super(PieceCode.ELEPHANT, isRed, position)
   }
 
   public override getAllValidMoves(board: Board): Position[] {
