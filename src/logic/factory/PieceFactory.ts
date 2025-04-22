@@ -1,14 +1,15 @@
 import Position from "../Position"
 import Piece from "../Piece"
 import Color from "../Color"
+import PieceCode from "./PieceCode"
 
 /**
  * An abstract class to represent a factory of pieces. This follows factory design pattern.
  */
 abstract class PieceFactory {
-  protected code = -1
+  protected code: PieceCode
 
-  protected constructor(code: number) {
+  protected constructor(code: PieceCode) {
     this.code = code
   }
 
