@@ -1,12 +1,12 @@
 import Piece from "../../../../src/logic/Piece"
 import Rook from "../../../../src/logic/pieces/Rook"
-import Color from "../../../../src/logic/Color"
 import Board from "../../../../src/logic/Board"
 import Position from "../../../../src/logic/Position"
+import PieceCode from "../../../../src/logic/factory/PieceCode"
 
 class PawnStub extends Piece {
-  public constructor(code: number, color: Color, position: Position) {
-    super(code, color, position)
+  public constructor(isRed: boolean, position: Position) {
+    super(PieceCode.PAWN, isRed, position)
   }
 
   getAllValidMoves(_board: Board): Position[] {
@@ -19,13 +19,11 @@ class PawnStub extends Piece {
 }
 
 function createRook(isRed: boolean, position: Position): Rook {
-  const code = 6
-  return new Rook(code, isRed ? Color.RED : Color.BLACK, position)
+  return new Rook(isRed, position)
 }
 
 function createPawnStub(isRed: boolean, position: Position): PawnStub {
-  const code = 1
-  return new PawnStub(code, isRed ? Color.RED : Color.BLACK, position)
+  return new PawnStub(isRed, position)
 }
 
 describe("Rook in an empty board", () => {
@@ -38,7 +36,7 @@ describe("Rook in an empty board", () => {
   test("red rook at (0, 0)", () => {
     const rook = createRook(true, new Position(0, 0))
     const board = emptyBoard.addPiece(rook)
-    let expectedValidMoves: Position[] = [
+    const expectedValidMoves: Position[] = [
       new Position(0, 1),
       new Position(0, 2),
       new Position(0, 3),
@@ -57,7 +55,7 @@ describe("Rook in an empty board", () => {
       new Position(7, 0),
       new Position(8, 0)
     ]
-    let actualMoves: Position[] = rook.getAllValidMoves(board)
+    const actualMoves: Position[] = rook.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -67,7 +65,7 @@ describe("Rook in an empty board", () => {
   test("red rook at (4, 5)", () => {
     const rook = createRook(true, new Position(4, 5))
     const board = emptyBoard.addPiece(rook)
-    let expectedValidMoves: Position[] = [
+    const expectedValidMoves: Position[] = [
       new Position(4, 6),
       new Position(4, 7),
       new Position(4, 8),
@@ -86,7 +84,7 @@ describe("Rook in an empty board", () => {
       new Position(7, 5),
       new Position(8, 5)
     ]
-    let actualMoves: Position[] = rook.getAllValidMoves(board)
+    const actualMoves: Position[] = rook.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -96,7 +94,7 @@ describe("Rook in an empty board", () => {
   test("red rook at (8, 9)", () => {
     const rook = createRook(true, new Position(8, 9))
     const board = emptyBoard.addPiece(rook)
-    let expectedValidMoves: Position[] = [
+    const expectedValidMoves: Position[] = [
       new Position(7, 9),
       new Position(6, 9),
       new Position(5, 9),
@@ -115,7 +113,7 @@ describe("Rook in an empty board", () => {
       new Position(8, 1),
       new Position(8, 0)
     ]
-    let actualMoves: Position[] = rook.getAllValidMoves(board)
+    const actualMoves: Position[] = rook.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -126,7 +124,7 @@ describe("Rook in an empty board", () => {
   test("black rook at (0, 9)", () => {
     const rook = createRook(false, new Position(0, 9))
     const board = emptyBoard.addPiece(rook)
-    let expectedValidMoves: Position[] = [
+    const expectedValidMoves: Position[] = [
       new Position(0, 8),
       new Position(0, 7),
       new Position(0, 6),
@@ -145,7 +143,7 @@ describe("Rook in an empty board", () => {
       new Position(7, 9),
       new Position(8, 9)
     ]
-    let actualMoves: Position[] = rook.getAllValidMoves(board)
+    const actualMoves: Position[] = rook.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -155,7 +153,7 @@ describe("Rook in an empty board", () => {
   test("black rook at (4, 4)", () => {
     const rook = createRook(false, new Position(4, 4))
     const board = emptyBoard.addPiece(rook)
-    let expectedValidMoves: Position[] = [
+    const expectedValidMoves: Position[] = [
       new Position(4, 5),
       new Position(4, 6),
       new Position(4, 7),
@@ -174,7 +172,7 @@ describe("Rook in an empty board", () => {
       new Position(7, 4),
       new Position(8, 4)
     ]
-    let actualMoves: Position[] = rook.getAllValidMoves(board)
+    const actualMoves: Position[] = rook.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -184,7 +182,7 @@ describe("Rook in an empty board", () => {
   test("black rook at (8, 0)", () => {
     const rook = createRook(false, new Position(8, 0))
     const board = emptyBoard.addPiece(rook)
-    let expectedValidMoves: Position[] = [
+    const expectedValidMoves: Position[] = [
       new Position(7, 0),
       new Position(6, 0),
       new Position(5, 0),
@@ -203,7 +201,7 @@ describe("Rook in an empty board", () => {
       new Position(8, 8),
       new Position(8, 9)
     ]
-    let actualMoves: Position[] = rook.getAllValidMoves(board)
+    const actualMoves: Position[] = rook.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -232,7 +230,7 @@ describe("Rook movement logic", () => {
         .addPiece(rook)
         .addPiece(createRook(true, new Position(4, 8)))
 
-      let expectedValidMoves: Position[] = [
+      const expectedValidMoves: Position[] = [
         new Position(4, 7),
         new Position(4, 6),
         new Position(4, 5),
@@ -250,7 +248,7 @@ describe("Rook movement logic", () => {
         new Position(8, 4)
       ]
 
-      let actualMoves = rook.getAllValidMoves(board)
+      const actualMoves = rook.getAllValidMoves(board)
       expect(expectedValidMoves).toHaveLength(actualMoves.length)
       expect(
         expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -263,7 +261,7 @@ describe("Rook movement logic", () => {
         .addPiece(rook)
         .addPiece(createRook(true, new Position(6, 4)))
 
-      let expectedValidMoves: Position[] = [
+      const expectedValidMoves: Position[] = [
         new Position(4, 5),
         new Position(4, 6),
         new Position(4, 7),
@@ -280,7 +278,7 @@ describe("Rook movement logic", () => {
         new Position(5, 4)
       ]
 
-      let actualMoves = rook.getAllValidMoves(board)
+      const actualMoves = rook.getAllValidMoves(board)
       expect(expectedValidMoves).toHaveLength(actualMoves.length)
       expect(
         expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -297,9 +295,9 @@ describe("Rook movement logic", () => {
         .addPiece(createRook(true, new Position(3, 4)))
         .addPiece(createRook(true, new Position(5, 4)))
 
-      let expectedValidMoves: Position[] = []
+      const expectedValidMoves: Position[] = []
 
-      let actualMoves = rook.getAllValidMoves(board)
+      const actualMoves = rook.getAllValidMoves(board)
       expect(expectedValidMoves).toHaveLength(actualMoves.length)
       expect(
         expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -314,7 +312,7 @@ describe("Rook movement logic", () => {
         .addPiece(createRook(true, new Position(4, 8)))
         .addPiece(createRook(true, new Position(8, 4)))
 
-      let expectedValidMoves: Position[] = [
+      const expectedValidMoves: Position[] = [
         new Position(4, 7),
         new Position(4, 6),
         new Position(4, 5),
@@ -331,7 +329,7 @@ describe("Rook movement logic", () => {
         new Position(7, 4)
       ]
 
-      let actualMoves = rook.getAllValidMoves(board)
+      const actualMoves = rook.getAllValidMoves(board)
       expect(expectedValidMoves).toHaveLength(actualMoves.length)
       expect(
         expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -347,7 +345,7 @@ describe("Rook movement logic", () => {
         .addPiece(createRook(true, new Position(8, 4)))
         .addPiece(createRook(true, new Position(4, 2)))
 
-      let expectedValidMoves: Position[] = [
+      const expectedValidMoves: Position[] = [
         new Position(4, 7),
         new Position(4, 6),
         new Position(4, 5),
@@ -361,7 +359,7 @@ describe("Rook movement logic", () => {
         new Position(7, 4)
       ]
 
-      let actualMoves = rook.getAllValidMoves(board)
+      const actualMoves = rook.getAllValidMoves(board)
       expect(expectedValidMoves).toHaveLength(actualMoves.length)
       expect(
         expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -376,7 +374,7 @@ describe("Rook movement logic", () => {
         .addPiece(createRook(true, new Position(8, 4)))
         .addPiece(createRook(true, new Position(4, 2)))
 
-      let expectedValidMoves: Position[] = [
+      const expectedValidMoves: Position[] = [
         new Position(4, 7),
         new Position(4, 6),
         new Position(4, 5),
@@ -390,7 +388,7 @@ describe("Rook movement logic", () => {
         new Position(7, 4)
       ]
 
-      let actualMoves = rook.getAllValidMoves(board)
+      const actualMoves = rook.getAllValidMoves(board)
       expect(expectedValidMoves).toHaveLength(actualMoves.length)
       expect(
         expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -405,7 +403,7 @@ describe("Rook movement logic", () => {
         .addPiece(createPawnStub(true, new Position(8, 4))) // 友方 Pawn 挡住右侧
         .addPiece(createPawnStub(true, new Position(4, 2))) // 友方 Pawn 挡住下方
 
-      let expectedValidMoves: Position[] = [
+      const expectedValidMoves: Position[] = [
         new Position(4, 7),
         new Position(4, 6),
         new Position(4, 5),
@@ -419,7 +417,7 @@ describe("Rook movement logic", () => {
         new Position(7, 4)
       ]
 
-      let actualMoves = rook.getAllValidMoves(board)
+      const actualMoves = rook.getAllValidMoves(board)
       expect(expectedValidMoves).toHaveLength(actualMoves.length)
       expect(
         expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -436,14 +434,14 @@ describe("Rook movement logic", () => {
         .addPiece(createRook(false, new Position(3, 4)))
         .addPiece(createRook(false, new Position(5, 4)))
 
-      let expectedValidMoves: Position[] = [
+      const expectedValidMoves: Position[] = [
         new Position(4, 3),
         new Position(4, 5),
         new Position(3, 4),
         new Position(5, 4)
       ]
 
-      let actualMoves = rook.getAllValidMoves(board)
+      const actualMoves = rook.getAllValidMoves(board)
       expect(expectedValidMoves).toHaveLength(actualMoves.length)
       expect(
         expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -460,7 +458,7 @@ describe("Rook movement logic", () => {
       .addPiece(createRook(false, new Position(1, 4)))
       .addPiece(createRook(false, new Position(8, 4)))
 
-    let expectedValidMoves: Position[] = [
+    const expectedValidMoves: Position[] = [
       new Position(4, 1),
       new Position(4, 2),
       new Position(4, 3),
@@ -477,7 +475,7 @@ describe("Rook movement logic", () => {
       new Position(8, 4)
     ]
 
-    let actualMoves = rook.getAllValidMoves(board)
+    const actualMoves = rook.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))

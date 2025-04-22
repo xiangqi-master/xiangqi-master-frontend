@@ -2,14 +2,14 @@ import Piece from "../Piece"
 import Board from "../Board"
 import Position from "../Position"
 import Optional from "../utils/Optional"
-import Color from "../Color"
+import PieceCode from "../factory/PieceCode"
 
 /**
  * A class to represent a pawn on a checkerboard.
  */
 class Pawn extends Piece {
-  public constructor(code: number, color: Color, position: Position) {
-    super(code, color, position)
+  public constructor(isRed: boolean, position: Position) {
+    super(PieceCode.PAWN, isRed, position)
   }
 
   public override getAllValidMoves(board: Board): Position[] {

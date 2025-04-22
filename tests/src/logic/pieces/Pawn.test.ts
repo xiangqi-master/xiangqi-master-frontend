@@ -1,11 +1,9 @@
 import Pawn from "../../../../src/logic/pieces/Pawn"
 import Board from "../../../../src/logic/Board"
-import Color from "../../../../src/logic/Color"
 import Position from "../../../../src/logic/Position"
 
 function createPawn(isRed: boolean, position: Position): Pawn {
-  const code = 1
-  return new Pawn(code, isRed ? Color.RED : Color.BLACK, position)
+  return new Pawn(isRed, position)
 }
 
 describe("Pawn in an empty board", () => {
@@ -18,8 +16,8 @@ describe("Pawn in an empty board", () => {
   test("red pawn at (0, 3)", () => {
     const pawn = createPawn(true, new Position(0, 3))
     const board = emptyBoard.addPiece(pawn)
-    let expectedValidMoves: Position[] = [new Position(0, 4)]
-    let actualMoves: Position[] = pawn.getAllValidMoves(board)
+    const expectedValidMoves: Position[] = [new Position(0, 4)]
+    const actualMoves: Position[] = pawn.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -29,11 +27,11 @@ describe("Pawn in an empty board", () => {
   test("red pawn at (0, 5)", () => {
     const pawn = createPawn(true, new Position(0, 5))
     const board = emptyBoard.addPiece(pawn)
-    let expectedValidMoves: Position[] = [
+    const expectedValidMoves: Position[] = [
       new Position(0, 6),
       new Position(1, 5)
     ]
-    let actualMoves: Position[] = pawn.getAllValidMoves(board)
+    const actualMoves: Position[] = pawn.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -43,12 +41,12 @@ describe("Pawn in an empty board", () => {
   test("red pawn at (2, 6)", () => {
     const pawn = createPawn(true, new Position(2, 6))
     const board = emptyBoard.addPiece(pawn)
-    let expectedValidMoves: Position[] = [
+    const expectedValidMoves: Position[] = [
       new Position(2, 7),
       new Position(1, 6),
       new Position(3, 6)
     ]
-    let actualMoves: Position[] = pawn.getAllValidMoves(board)
+    const actualMoves: Position[] = pawn.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -58,8 +56,8 @@ describe("Pawn in an empty board", () => {
   test("red pawn at (8, 9)", () => {
     const pawn = createPawn(true, new Position(8, 9))
     const board = emptyBoard.addPiece(pawn)
-    let expectedValidMoves: Position[] = [new Position(7, 9)]
-    let actualMoves: Position[] = pawn.getAllValidMoves(board)
+    const expectedValidMoves: Position[] = [new Position(7, 9)]
+    const actualMoves: Position[] = pawn.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -70,8 +68,8 @@ describe("Pawn in an empty board", () => {
   test("black pawn at (0, 5)", () => {
     const pawn = createPawn(false, new Position(0, 5))
     const board = emptyBoard.addPiece(pawn)
-    let expectedValidMoves: Position[] = [new Position(0, 4)]
-    let actualMoves: Position[] = pawn.getAllValidMoves(board)
+    const expectedValidMoves: Position[] = [new Position(0, 4)]
+    const actualMoves: Position[] = pawn.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -81,11 +79,11 @@ describe("Pawn in an empty board", () => {
   test("black pawn at (0, 4)", () => {
     const pawn = createPawn(false, new Position(0, 4))
     const board = emptyBoard.addPiece(pawn)
-    let expectedValidMoves: Position[] = [
+    const expectedValidMoves: Position[] = [
       new Position(0, 3),
       new Position(1, 4)
     ]
-    let actualMoves: Position[] = pawn.getAllValidMoves(board)
+    const actualMoves: Position[] = pawn.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -95,12 +93,12 @@ describe("Pawn in an empty board", () => {
   test("black pawn at (6, 2)", () => {
     const pawn = createPawn(false, new Position(6, 2))
     const board = emptyBoard.addPiece(pawn)
-    let expectedValidMoves: Position[] = [
+    const expectedValidMoves: Position[] = [
       new Position(6, 1),
       new Position(5, 2),
       new Position(7, 2)
     ]
-    let actualMoves: Position[] = pawn.getAllValidMoves(board)
+    const actualMoves: Position[] = pawn.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -110,8 +108,8 @@ describe("Pawn in an empty board", () => {
   test("black pawn at (8, 0)", () => {
     const pawn = createPawn(false, new Position(8, 0))
     const board = emptyBoard.addPiece(pawn)
-    let expectedValidMoves: Position[] = [new Position(7, 0)]
-    let actualMoves: Position[] = pawn.getAllValidMoves(board)
+    const expectedValidMoves: Position[] = [new Position(7, 0)]
+    const actualMoves: Position[] = pawn.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -130,8 +128,8 @@ describe("Pawn surrounded obstacles", () => {
     const board = emptyBoard
       .addPiece(createPawn(true, new Position(1, 6)))
       .addPiece(createPawn(true, new Position(3, 6)))
-    let expectedValidMoves: Position[] = [new Position(2, 7)]
-    let actualMoves: Position[] = pawn.getAllValidMoves(board)
+    const expectedValidMoves: Position[] = [new Position(2, 7)]
+    const actualMoves: Position[] = pawn.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -143,11 +141,11 @@ describe("Pawn surrounded obstacles", () => {
     const board = emptyBoard
       .addPiece(createPawn(false, new Position(6, 1)))
       .addPiece(createPawn(true, new Position(5, 2)))
-    let expectedValidMoves: Position[] = [
+    const expectedValidMoves: Position[] = [
       new Position(5, 2),
       new Position(7, 2)
     ]
-    let actualMoves: Position[] = pawn.getAllValidMoves(board)
+    const actualMoves: Position[] = pawn.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -160,8 +158,8 @@ describe("Pawn surrounded obstacles", () => {
       .addPiece(createPawn(false, new Position(6, 1)))
       .addPiece(createPawn(false, new Position(5, 2)))
       .addPiece(createPawn(false, new Position(7, 2)))
-    let expectedValidMoves: Position[] = []
-    let actualMoves: Position[] = pawn.getAllValidMoves(board)
+    const expectedValidMoves: Position[] = []
+    const actualMoves: Position[] = pawn.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
