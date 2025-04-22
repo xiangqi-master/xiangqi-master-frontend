@@ -28,7 +28,7 @@ class Optional<T> {
    * @throws {Error} if the value is null
    */
   public static of<T>(value: ValueType<T>): Optional<T> {
-    if (!value) {
+    if (value === undefined || value === null) {
       throw new Error("Value cannot be null or undefined")
     }
     return new Optional<T>(value)
