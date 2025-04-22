@@ -68,8 +68,8 @@ describe("Test: hasCrossedRiver", () => {
 
 describe("Test: equals", () => {
   test("equals === true", () => {
-    let position1 = new Position(1, 3)
-    let position2 = new Position(1, 3)
+    const position1 = new Position(1, 3)
+    const position2 = new Position(1, 3)
     expect(position1.equals(position2)).toBeTruthy()
   })
 
@@ -84,16 +84,14 @@ describe("Test: equals", () => {
   })
 
   test("equals === false due to null position", () => {
-    let position1 = new Position(1, 3)
-    let position2 = null
-    // @ts-ignore
+    const position1 = new Position(1, 3)
+    const position2 = null
     expect(position1.equals(position2)).toBeFalsy()
   })
 
   test("equals === false due to undefined position", () => {
-    let position1 = new Position(1, 3)
-    let position2 = undefined
-    // @ts-ignore
+    const position1 = new Position(1, 3)
+    const position2 = undefined
     expect(position1.equals(position2)).toBeFalsy()
   })
 })

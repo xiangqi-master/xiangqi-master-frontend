@@ -1,13 +1,14 @@
 import Piece from "../Piece"
 import Board from "../Board"
 import Position from "../Position"
+import PieceCode from "../factory/PieceCode"
 
 /**
  * A class to represent a horse on a checkerboard.
  */
 class Horse extends Piece {
-  public constructor(code: number, position: Position) {
-    super(code, position)
+  public constructor(isRed: boolean, position: Position) {
+    super(PieceCode.HORSE, isRed, position)
   }
 
   public override getAllValidMoves(board: Board): Position[] {
@@ -36,7 +37,7 @@ class Horse extends Piece {
       .filter(
         (pos) =>
           !board.getPieceByPosition(pos) ||
-          board.getPieceByPosition(pos)!.isRed() !== isRed // Allow empty or opponent positions
+          board.getPieceByPosition(pos)?.isRed() !== isRed // Allow empty or opponent positions
       )
   }
 

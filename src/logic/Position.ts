@@ -55,7 +55,7 @@ class Position {
     return (((this.x + this.y) * (this.x + this.y + 1)) >> 1) + this.y
   }
 
-  public equals(position: Position): boolean {
+  public equals(position: Position | undefined | null): boolean {
     if (!position) {
       return false
     }

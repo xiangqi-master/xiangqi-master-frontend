@@ -1,12 +1,12 @@
 import Piece from "../../../../src/logic/Piece"
 import Advisor from "../../../../src/logic/pieces/Advisor"
-import Color from "../../../../src/logic/Color"
 import Board from "../../../../src/logic/Board"
 import Position from "../../../../src/logic/Position"
+import PieceCode from "../../../../src/logic/factory/PieceCode"
 
 class PawnStub extends Piece {
-  public constructor(code: number, color: Color, position: Position) {
-    super(code, color, position)
+  public constructor(isRed: boolean, position: Position) {
+    super(PieceCode.PAWN, isRed, position)
   }
 
   getAllValidMoves(_board: Board): Position[] {
@@ -19,8 +19,8 @@ class PawnStub extends Piece {
 }
 
 class HorseStub extends Piece {
-  public constructor(code: number, color: Color, position: Position) {
-    super(code, color, position)
+  public constructor(isRed: boolean, position: Position) {
+    super(PieceCode.HORSE, isRed, position)
   }
 
   getAllValidMoves(_board: Board): Position[] {
@@ -33,18 +33,15 @@ class HorseStub extends Piece {
 }
 
 function createAdvisor(isRed: boolean, position: Position): Advisor {
-  const code = 2
-  return new Advisor(code, isRed ? Color.RED : Color.BLACK, position)
+  return new Advisor(isRed, position)
 }
 
 function createPawnStub(isRed: boolean, position: Position): PawnStub {
-  const code = 1
-  return new PawnStub(code, isRed ? Color.RED : Color.BLACK, position)
+  return new PawnStub(isRed, position)
 }
 
 function createHorseStub(isRed: boolean, position: Position): PawnStub {
-  const code = 4
-  return new HorseStub(code, isRed ? Color.RED : Color.BLACK, position)
+  return new HorseStub(isRed, position)
 }
 
 describe("Advisor in an empty board", () => {
@@ -57,8 +54,8 @@ describe("Advisor in an empty board", () => {
   test("red advisor at (3, 0)", () => {
     const advisor = createAdvisor(true, new Position(3, 0))
     const board = emptyBoard.addPiece(advisor)
-    let expectedValidMoves: Position[] = [new Position(4, 1)]
-    let actualMoves: Position[] = advisor.getAllValidMoves(board)
+    const expectedValidMoves: Position[] = [new Position(4, 1)]
+    const actualMoves: Position[] = advisor.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -68,8 +65,8 @@ describe("Advisor in an empty board", () => {
   test("red advisor at (5, 0)", () => {
     const advisor = createAdvisor(true, new Position(5, 0))
     const board = emptyBoard.addPiece(advisor)
-    let expectedValidMoves: Position[] = [new Position(4, 1)]
-    let actualMoves: Position[] = advisor.getAllValidMoves(board)
+    const expectedValidMoves: Position[] = [new Position(4, 1)]
+    const actualMoves: Position[] = advisor.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -79,8 +76,8 @@ describe("Advisor in an empty board", () => {
   test("red advisor at (3, 2)", () => {
     const advisor = createAdvisor(true, new Position(3, 2))
     const board = emptyBoard.addPiece(advisor)
-    let expectedValidMoves: Position[] = [new Position(4, 1)]
-    let actualMoves: Position[] = advisor.getAllValidMoves(board)
+    const expectedValidMoves: Position[] = [new Position(4, 1)]
+    const actualMoves: Position[] = advisor.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -90,8 +87,8 @@ describe("Advisor in an empty board", () => {
   test("red advisor at (5, 2)", () => {
     const advisor = createAdvisor(true, new Position(5, 2))
     const board = emptyBoard.addPiece(advisor)
-    let expectedValidMoves: Position[] = [new Position(4, 1)]
-    let actualMoves: Position[] = advisor.getAllValidMoves(board)
+    const expectedValidMoves: Position[] = [new Position(4, 1)]
+    const actualMoves: Position[] = advisor.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -101,13 +98,13 @@ describe("Advisor in an empty board", () => {
   test("red advisor at (4, 1)", () => {
     const advisor = createAdvisor(true, new Position(4, 1))
     const board = emptyBoard.addPiece(advisor)
-    let expectedValidMoves: Position[] = [
+    const expectedValidMoves: Position[] = [
       new Position(3, 0),
       new Position(3, 2),
       new Position(5, 2),
       new Position(5, 0)
     ]
-    let actualMoves: Position[] = advisor.getAllValidMoves(board)
+    const actualMoves: Position[] = advisor.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -118,8 +115,8 @@ describe("Advisor in an empty board", () => {
   test("black advisor at (3, 9)", () => {
     const advisor = createAdvisor(true, new Position(3, 9))
     const board = emptyBoard.addPiece(advisor)
-    let expectedValidMoves: Position[] = [new Position(4, 8)]
-    let actualMoves: Position[] = advisor.getAllValidMoves(board)
+    const expectedValidMoves: Position[] = [new Position(4, 8)]
+    const actualMoves: Position[] = advisor.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -129,8 +126,8 @@ describe("Advisor in an empty board", () => {
   test("black advisor at (5, 9)", () => {
     const advisor = createAdvisor(true, new Position(5, 9))
     const board = emptyBoard.addPiece(advisor)
-    let expectedValidMoves: Position[] = [new Position(4, 8)]
-    let actualMoves: Position[] = advisor.getAllValidMoves(board)
+    const expectedValidMoves: Position[] = [new Position(4, 8)]
+    const actualMoves: Position[] = advisor.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -140,8 +137,8 @@ describe("Advisor in an empty board", () => {
   test("black advisor at (3, 7)", () => {
     const advisor = createAdvisor(true, new Position(3, 7))
     const board = emptyBoard.addPiece(advisor)
-    let expectedValidMoves: Position[] = [new Position(4, 8)]
-    let actualMoves: Position[] = advisor.getAllValidMoves(board)
+    const expectedValidMoves: Position[] = [new Position(4, 8)]
+    const actualMoves: Position[] = advisor.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -151,8 +148,8 @@ describe("Advisor in an empty board", () => {
   test("black advisor at (5, 7)", () => {
     const advisor = createAdvisor(true, new Position(5, 7))
     const board = emptyBoard.addPiece(advisor)
-    let expectedValidMoves: Position[] = [new Position(4, 8)]
-    let actualMoves: Position[] = advisor.getAllValidMoves(board)
+    const expectedValidMoves: Position[] = [new Position(4, 8)]
+    const actualMoves: Position[] = advisor.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -169,8 +166,8 @@ describe("Advisor surrounded by obstacles", () => {
   test("red advisor at (3, 0) surrounded by 1 black pawn", () => {
     const advisor = createAdvisor(true, new Position(3, 0))
     const board = emptyBoard.addPiece(createPawnStub(false, new Position(4, 1)))
-    let expectedValidMoves: Position[] = [new Position(4, 1)]
-    let actualMoves: Position[] = advisor.getAllValidMoves(board)
+    const expectedValidMoves: Position[] = [new Position(4, 1)]
+    const actualMoves: Position[] = advisor.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -180,8 +177,8 @@ describe("Advisor surrounded by obstacles", () => {
   test("red advisor at (5, 0) surrounded by 1 black pawn", () => {
     const advisor = createAdvisor(true, new Position(5, 0))
     const board = emptyBoard.addPiece(createPawnStub(false, new Position(4, 1)))
-    let expectedValidMoves: Position[] = [new Position(4, 1)]
-    let actualMoves: Position[] = advisor.getAllValidMoves(board)
+    const expectedValidMoves: Position[] = [new Position(4, 1)]
+    const actualMoves: Position[] = advisor.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -193,11 +190,11 @@ describe("Advisor surrounded by obstacles", () => {
     const board = emptyBoard
       .addPiece(createHorseStub(true, new Position(5, 2)))
       .addPiece(createAdvisor(true, new Position(5, 0)))
-    let expectedValidMoves: Position[] = [
+    const expectedValidMoves: Position[] = [
       new Position(3, 2),
       new Position(3, 0)
     ]
-    let actualMoves: Position[] = advisor.getAllValidMoves(board)
+    const actualMoves: Position[] = advisor.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -207,8 +204,8 @@ describe("Advisor surrounded by obstacles", () => {
   test("black advisor at (3, 9) surrounded by 1 red pawn", () => {
     const advisor = createAdvisor(false, new Position(3, 9))
     const board = emptyBoard.addPiece(createPawnStub(true, new Position(4, 8)))
-    let expectedValidMoves: Position[] = [new Position(4, 8)]
-    let actualMoves: Position[] = advisor.getAllValidMoves(board)
+    const expectedValidMoves: Position[] = [new Position(4, 8)]
+    const actualMoves: Position[] = advisor.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
@@ -220,8 +217,8 @@ describe("Advisor surrounded by obstacles", () => {
     const board = emptyBoard.addPiece(
       createHorseStub(false, new Position(4, 8))
     )
-    let expectedValidMoves: Position[] = []
-    let actualMoves: Position[] = advisor.getAllValidMoves(board)
+    const expectedValidMoves: Position[] = []
+    const actualMoves: Position[] = advisor.getAllValidMoves(board)
     expect(expectedValidMoves).toHaveLength(actualMoves.length)
     expect(
       expectedValidMoves.every((p) => actualMoves.some((p1) => p.equals(p1)))
