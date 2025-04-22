@@ -1,6 +1,7 @@
 import PawnFactory from "../../../../../src/logic/factory/pieceFactory/PawnFactory"
 import Position from "../../../../../src/logic/Position"
 import Pawn from "../../../../../src/logic/pieces/Pawn"
+import PieceCode from "../../../../../src/logic/factory/PieceCode"
 
 describe("PawnFactory", () => {
   test("isRed === true", () => {
@@ -8,7 +9,7 @@ describe("PawnFactory", () => {
     const pawn = new PawnFactory().createPiece(true, position)
     expect(pawn).toBeInstanceOf(Pawn)
     expect(pawn.getPosition().equals(position)).toBeTruthy()
-    expect(pawn.getCode()).toBe(6)
+    expect(pawn.getCode()).toBe(PieceCode.PAWN)
     expect(pawn.isRed()).toBeTruthy()
   })
 
@@ -17,7 +18,7 @@ describe("PawnFactory", () => {
     const pawn = new PawnFactory().createPiece(false, position)
     expect(pawn).toBeInstanceOf(Pawn)
     expect(pawn.getPosition().equals(position)).toBeTruthy()
-    expect(pawn.getCode()).toBe(16)
+    expect(pawn.getCode()).toBe(PieceCode.PAWN)
     expect(pawn.isRed()).toBeFalsy()
   })
 })

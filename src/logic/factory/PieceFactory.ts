@@ -1,13 +1,15 @@
 import Position from "../Position"
 import Piece from "../Piece"
+import Color from "../Color"
+import PieceCode from "./PieceCode"
 
 /**
  * An abstract class to represent a factory of pieces. This follows factory design pattern.
  */
 abstract class PieceFactory {
-  protected code: number = -1
+  protected code: PieceCode
 
-  protected constructor(code: number) {
+  protected constructor(code: PieceCode) {
     this.code = code
   }
 
@@ -20,13 +22,10 @@ abstract class PieceFactory {
   public abstract createPiece(_isRed: boolean, _position: Position): Piece
 
   /**
-   * Converts a piece to either red or black given by {@link isRed}.
-   *
-   * @param isRed specify if this piece should be converted to red
-   * @protected
+   * Gets the code of this piece.
    */
-  protected convertPieceCode(isRed: boolean): number {
-    return isRed ? this.code : this.code + 10
+  protected getColor(isRed: boolean): Color {
+    return isRed ? Color.RED : Color.BLACK
   }
 }
 

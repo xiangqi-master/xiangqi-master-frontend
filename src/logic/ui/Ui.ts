@@ -7,9 +7,11 @@ import Piece from "../Piece"
  */
 class Ui {
   private chalk: ChalkInstance
+
+  /* eslint-disable-next-line no-console */
   private print = console.log
 
-  public constructor(colorSupportEnabled: boolean = true) {
+  public constructor(colorSupportEnabled = true) {
     this.chalk = new Chalk({ level: colorSupportEnabled ? 3 : 0 })
   }
 

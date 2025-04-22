@@ -1,10 +1,11 @@
 import Pawn from "../../../../src/logic/pieces/Pawn"
 import Board from "../../../../src/logic/Board"
+import Color from "../../../../src/logic/Color"
 import Position from "../../../../src/logic/Position"
 
 function createPawn(isRed: boolean, position: Position): Pawn {
-  const code = 6
-  return new Pawn(isRed ? code : code + 10, position)
+  const code = 1
+  return new Pawn(code, isRed ? Color.RED : Color.BLACK, position)
 }
 
 describe("Pawn in an empty board", () => {
@@ -137,7 +138,7 @@ describe("Pawn surrounded obstacles", () => {
     ).toBeTruthy()
   })
 
-  test("black pawn at (6,2) with one obstacle", () => {
+  test("black pawn at (6, 2) with one obstacle", () => {
     const pawn = createPawn(false, new Position(6, 2))
     const board = emptyBoard
       .addPiece(createPawn(false, new Position(6, 1)))
@@ -153,7 +154,7 @@ describe("Pawn surrounded obstacles", () => {
     ).toBeTruthy()
   })
 
-  test("black pawn at (6,2) with three obstacles", () => {
+  test("black pawn at (6, 2) with three obstacles", () => {
     const pawn = createPawn(false, new Position(6, 2))
     const board = emptyBoard
       .addPiece(createPawn(false, new Position(6, 1)))

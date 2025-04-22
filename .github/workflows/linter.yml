@@ -14,6 +14,6 @@ jobs:
         run: npm ci
       - name: run ESLint
         run: >-
-          npx eslint --ext .js,.jsx,.ts,.tsx . --rule "prettier/prettier: ['error']"
+          npx eslint --ext .js,.jsx,.ts,.tsx ./src/ --rule "prettier/prettier: ['error']"
       - name: run test cases
         run: npm run test

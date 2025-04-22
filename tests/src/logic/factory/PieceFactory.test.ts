@@ -2,31 +2,52 @@ import PieceFactory from "../../../../src/logic/factory/PieceFactory"
 import Position from "../../../../src/logic/Position"
 import Piece from "../../../../src/logic/Piece"
 import Pawn from "../../../../src/logic/pieces/Pawn"
+import Color from "../../../../src/logic/Color"
+import PieceCode from "../../../../src/logic/factory/PieceCode"
 
-class ConvertPieceCodeTest extends PieceFactory {
+class PieceFactoryTest extends PieceFactory {
   constructor(code: number) {
     super(code)
   }
 
-  createPiece(_isRed: boolean, _position: Position): Piece {
-    return new Pawn(0, new Position(0, 0))
+  createPiece(isRed: boolean, position: Position): Piece {
+    const color = super.getColor(isRed)
+    return new Pawn(PieceCode.PAWN, color, position)
   }
 
-  public test(isRed: boolean): number {
-    return super.convertPieceCode(isRed)
+  public getColor(isRed: boolean): Color {
+    return super.getColor(isRed)
   }
 }
 
-describe("convertPieceCode", () => {
-  test("isRed === true", () => {
-    expect(new ConvertPieceCodeTest(0).test(true)).toBe(0)
-    expect(new ConvertPieceCodeTest(10).test(true)).toBe(10)
-    expect(new ConvertPieceCodeTest(-1).test(true)).toBe(-1)
+describe("PieceFactory", () => {
+  test("getColor: isRed === true", () => {
+    expect(new PieceFactoryTest(0).getColor(true)).toBe(Color.RED)
+    expect(new PieceFactoryTest(10).getColor(true)).toBe(Color.RED)
+    expect(new PieceFactoryTest(-1).getColor(true)).toBe(Color.RED)
   })
 
-  test("isRed === false", () => {
-    expect(new ConvertPieceCodeTest(0).test(false)).toBe(10)
-    expect(new ConvertPieceCodeTest(10).test(false)).toBe(20)
-    expect(new ConvertPieceCodeTest(-1).test(false)).toBe(9)
+  test("getColor: isRed === false", () => {
+    expect(new PieceFactoryTest(0).getColor(false)).toBe(Color.BLACK)
+    expect(new PieceFactoryTest(10).getColor(false)).toBe(Color.BLACK)
+    expect(new PieceFactoryTest(-1).getColor(false)).toBe(Color.BLACK)
+  })
+
+  test("createPiece: isRed === true", () => {
+    const pieceFactoryTest = new PieceFactoryTest(1)
+    const pawn = pieceFactoryTest.createPiece(
+      true,
+      new Position(Position.START, Position.START)
+    )
+    expect(pawn.isRed()).toBe(true)
+  })
+
+  test("createPiece: isRed === false", () => {
+    const pieceFactoryTest = new PieceFactoryTest(1)
+    const pawn = pieceFactoryTest.createPiece(
+      false,
+      new Position(Position.START, Position.START)
+    )
+    expect(pawn.isRed()).toBe(false)
   })
 })

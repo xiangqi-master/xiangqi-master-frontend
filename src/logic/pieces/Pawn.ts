@@ -2,18 +2,18 @@ import Piece from "../Piece"
 import Board from "../Board"
 import Position from "../Position"
 import Optional from "../utils/Optional"
+import Color from "../Color"
 
 /**
  * A class to represent a pawn on a checkerboard.
  */
 class Pawn extends Piece {
-  public constructor(code: number, position: Position) {
-    super(code, position)
+  public constructor(code: number, color: Color, position: Position) {
+    super(code, color, position)
   }
 
   public override getAllValidMoves(board: Board): Position[] {
-    const isRed: boolean = super.isRed()
-    const forwardDirection: 1 | -1 = isRed ? 1 : -1
+    const forwardDirection: 1 | -1 = this.isRed() ? 1 : -1
     const moveDirections: number[][] = [
       [-1, 0],
       [1, 0],
@@ -34,13 +34,13 @@ class Pawn extends Piece {
         // check if there is a piece
         Optional.ofNullable(board.getPieceByPosition(position))
           .or(() => Optional.of(this))
-          .filter((piece) => piece === this || piece.isRed() !== isRed)
+          .filter((piece) => piece === this || piece.isRed() !== this.isRed())
           .isPresent()
       )
       .filter(
         // Prevent Pawn from moving left or right before crossing the river
         (position) =>
-          position.hasCrossedRiver(isRed) ||
+          position.hasCrossedRiver(this.isRed()) ||
           !invalidXCoordinates.some(
             (invalidXCoordinate) => invalidXCoordinate === position.getX()
           )

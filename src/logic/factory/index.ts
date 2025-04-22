@@ -1,5 +1,5 @@
 export { default as PieceFactory } from "./PieceFactory"
-export { default as PieceType } from "./PieceType"
+export { default as PieceType } from "./PieceCode"
 export { default as PawnFactory } from "./pieceFactory/PawnFactory"
 export { default as AdvisorFactory } from "./pieceFactory/AdvisorFactory"
 export { default as RookFactory } from "./pieceFactory/RookFactory"
